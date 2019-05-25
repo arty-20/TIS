@@ -4,8 +4,8 @@ namespace App\Http\Controllers\docente;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\GrupoLaboratorio;
-use App\HoraDiaLaboratorio;
+use App\Modelos\GrupoLaboratorio;
+use App\Modelos\HoraDiaLaboratorio;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\GrupoLabFormRequest;
 use DB;
@@ -18,14 +18,9 @@ class DocenteController extends Controller
 
     public function index()
     {
-        $materias = DB::table('docente_materia as dm')
-        ->join('docente as d','d.ID_DOCENTE','=','dm.ID_DOCENTE')
-        ->join('materia as m','m.ID_MATERIA','=','dm.ID_MATERIA')
-        ->where('d.ESTADO','=','1')
-        ->where('dm.ID_DOCENTE','=','1001');
-        $materias = $materias->get();
-
-        return view('docente.index',["materias"=>$materias]);
+     $materias = DB::table('materia as m')->get();
+        
+        return view('docente.docente',["materias"=>$materias]);
 
     }
 
