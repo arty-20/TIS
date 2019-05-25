@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Modelos;
 
 use Illuminate\Database\Eloquent\Model;
 
 class PracticaGrupo extends Model
 {
-     protected $table='practica_grupo';
+    protected $table='practica_grupo';
 
     protected $primaryKey='ID_PRAC_GRUPO';
 
