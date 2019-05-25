@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auxiliar;
+namespace App\Http\Controllers\Auxiliares;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -76,7 +76,7 @@ class AuxiliarController1 extends Controller
     }
     public function edit($id)
     {
-      
+
       $estudiantes=DB::table('comentario_portafolio as cp')
       ->join('inscripcion as ins', 'cp.ID_INSCRIPCION', '=', 'ins.ID_INSCRIPCION')
       ->join('practica_grupo as pgru', 'cp.ID_PRAC_GRUPO', '=', 'pgru.ID_PRAC_GRUPO')
