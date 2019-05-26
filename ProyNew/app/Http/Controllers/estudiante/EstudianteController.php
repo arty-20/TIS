@@ -27,7 +27,7 @@ class EstudianteController extends Controller{
         $estudiante->CODIGO_SIS = $request->get('CODIGO_SIS');
         $estudiante->EMAIL = $request->get('EMAIL');
         $estudiante->CONTRASENIA = $request->get('CONTRASENIA');
-        $estudiante->ESTADO ='00';
+        $estudiante->ESTADO ='000';
         $estudiante->save();
         return Redirect::to('estudiante.registro');
 
