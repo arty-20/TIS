@@ -21,7 +21,7 @@ class AuxiliarController extends Controller
         {
             $query=trim($request->get('searchText'));
             $auxiliares=DB::table('auxiliar')->where('NOMBRE_AUXILIAR','LIKE','%'.$query.'%')
-            ->where ('ESTADO', '=', '1') 
+            ->where ('ESTADO', '=', '0') 
             ->orderBy('ID_AUXILIAR','desc')
             ->paginate(3);
             return view('administrador.auxiliar.index',["auxiliares"=>$auxiliares,"searchText"=>$query]);
