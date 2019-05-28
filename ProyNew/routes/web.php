@@ -14,23 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
-//Antoni
-Route::resource('administrador/docente', 'Administrador\DocenteController');
-Route::resource('administrador/materia', 'Administrador\MateriaController');
-Route::resource('administrador/auxiliar', 'Administrador\AuxiliarController');
+//Antony
+Route::resource('/administrador/docente', 'Administrador\DocenteController');
+Route::resource('/administrador/materia', 'Administrador\MateriaController');
+Route::resource('/administrador/auxiliar', 'Administrador\AuxiliarController');
+Route::resource('/administrador/estudiante','Administrador\EstudianteController');
 
-Route::resource('administrador/gestion', 'Administrador\GestionController');
-Route::get('administrador/gestion/lista/{id}','Administrador\GestionController@listGestion');
+Route::resource('/administrador/gestion', 'Administrador\GestionController');
+Route::get('/administrador/gestion/lista/{id}','Administrador\GestionController@listGestion');
 
-Route::resource('administrador/usuarios','UserController');
+Route::get('/administrador/horario/laboratorios/labs/{id}','Administrador\HorarioController@listar');
+Route::get('/administrador/horario/{id}','Administrador\HorarioController@ocupado');
+Route::resource('/administrador/horario','Administrador\HorarioController');
 
-Route::get('administrador/horario/{id}','HorarioController@ocupado');
-//Route::get('administrador/horario/{id}','HorarioController@listar');
-Route::get('administrador/horario/laboratorios/labs/{id}','HorarioController@listar');
-//Route::get('administrador/horario/{id}','HorarioController@libre');
-Route::resource('administrador/horario', 'HorarioController');
-
-//Route::resource('administrador/gestion/lista','ListaGestionController');
 //Arturo
 Route::resource('estudiante/registro', 'estudiante\EstudianteController');
 

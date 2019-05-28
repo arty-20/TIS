@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Administrador;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Docente;
+use App\Modelos\Docente;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\DocenteFormRequest;
 use DB;

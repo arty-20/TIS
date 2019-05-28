@@ -41,6 +41,6 @@
     </div>
 </div>
 <div>
-    <h4><a href="../auxiliar">Volver</a></h4>
+    <h4><a href="/administrador/auxiliar">Volver</a></h4>
 </div>
 @endsection
