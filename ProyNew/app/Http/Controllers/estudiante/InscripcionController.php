@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Modelos\Inscripcion;
 use DB;
 use App\Http\Requests\InscripcionFormRequest;
-use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Redirect;
 
@@ -31,7 +30,7 @@ class InscripcionController extends Controller{
         ->join('hora_clase as hc','hc.ID_HORA','=','hdl.ID_HORA')
         ->where('ESTADO_GC','=','1')
         // ->where('ID_ESTUDIANTE','=', $id);
-        ->where('ID_ESTUDIANTE','=', '100005');
+        ->where('ID_ESTUDIANTE','=', '100004');
         $gruposInscrito = $gruposInscrito->get();
         return view('estudiante.inscripcion.index',["gruposInscrito"=>$gruposInscrito]);
     }
@@ -43,7 +42,7 @@ class InscripcionController extends Controller{
         $bandera = false;
         $inscripcion = new Inscripcion;
         // $inscripcion->ID_ESTUDIANTE = "$id";
-        $inscripcion->ID_ESTUDIANTE = '100005';
+        $inscripcion->ID_ESTUDIANTE = '100004';
         $idgrupo=$request->get('ID_GRUPOLAB');
         $inscripcion->ID_GRUPOLAB =$idgrupo;
 
@@ -56,11 +55,11 @@ class InscripcionController extends Controller{
 
         $insc = DB::table('inscripcion')
         ->where('ID_GRUPOLAB','=',"$idgrupo");
-        $insc = $insc->get();
+        $insc = $insc->get(); 
 
         if(count($insc)<$cant){
             $insc1 = DB::table('inscripcion')
-            ->where('ID_ESTUDIANTE','=','100005')
+            ->where('ID_ESTUDIANTE','=','100004')
             ->where('ID_GRUPOLAB','=',$idgrupo);
             $insc1 = $insc1->get()->first();
             if($insc1 == null){
@@ -76,8 +75,7 @@ class InscripcionController extends Controller{
         $materias=DB::table('materia')
         ->where('ESTADO','=','1');
         $materias = $materias->get();
-        $date = Carbon::now();
-        return view('estudiante.inscripcion.listarMaterias',["materias"=>$materias,"fecha"=>$date]);
+        return view('estudiante.inscripcion.listarMaterias',["materias"=>$materias]);
     }
     public function listarDocentesDeLaMateria( $idMateria ){
         $docentes=DB::table('docente_materia as dm')
@@ -101,7 +99,7 @@ class InscripcionController extends Controller{
         $grupos = $grupos->get();
         $inscrito = DB::table('inscripcion')
         // ->where('ID_ESTUDIANTE','=',"$id");
-        ->where('ID_ESTUDIANTE','=','100005');
+        ->where('ID_ESTUDIANTE','=','100004');
         $inscrito=$inscrito->get();
         $ban = false;
         foreach($grupos as $g){ 

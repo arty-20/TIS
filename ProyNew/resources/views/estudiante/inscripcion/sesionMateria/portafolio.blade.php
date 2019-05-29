@@ -1,8 +1,6 @@
 @extends('estudiante.inscripcion.sesionMateria.principal')
 @section('sesionMateria')
-    <div class="row">
-      <p>{{Carbon::now()}}</p>
-    </div>
+    
     <div class="container">
 
     <div class="list-group">
