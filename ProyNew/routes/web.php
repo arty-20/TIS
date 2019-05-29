@@ -12,8 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
+Route::resource('estudiante/registro', 'estudiante\EstudianteController');
 //Antony
 Route::group(['middleware' => ['auth','admin']], function(){
 	Route::resource('/administrador/docente', 'Administrador\DocenteController');
@@ -32,7 +33,7 @@ Route::group(['middleware' => ['auth','admin']], function(){
 
 //Arturo
 Route::group(['middleware' => ['auth','estudiante']], function(){
-	Route::resource('estudiante/registro', 'estudiante\EstudianteController');
+	
 
 	Route::get('estudiante/inscripcion/listarMaterias','estudiante\InscripcionController@listarMaterias');
 	Route::get('estudiante/inscripcion/{id}','estudiante\InscripcionController@listarDocentesDeLaMateria');
