@@ -103,4 +103,9 @@ class AuxiliarController1 extends Controller
     {
 
     }
+    public function descargar($id, $archivo){
+        $public_path = public_path();
+        $url = $public_path."/archivosTIS/$id/".$archivo;
+        return response()->download($url);
+    }
 }

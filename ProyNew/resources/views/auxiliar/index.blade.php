@@ -16,6 +16,7 @@
 					<th>Nombre</th>
 					<th>Apellido</th>
 					<th>Documento</th>
+					<th>URL</th>
 					<th>Comentario</th>
 					<th>Estado Entrega</th>
 					<th>Otros</th>
@@ -26,6 +27,9 @@
 					<td>{{ $est->NOMBRE_ESTUDIANTE }}</td>
 					<td>{{ $est->APELLIDO_ESTUDIANTE }}</td>
 					<td>{{ $est->PRACTICA }}</td>
+					<td><a href="{{URL::action('estudiante\AuxiliarController1@descargar',
+												array('id'=>$est->ID_PORTAFOLIO,'ruta'=>$est->RUTA_ARCHIVO))}}"
+												class="list-group-item list-group-item-action">{{$est->RUTA_ARCHIVO}}</a></td>
 					<td>{{ $est->COMENTARIO_AUXILIAR }}</td>
 					<td>
 						@if ($est->COMENTARIO_AUXILIAR === '')
