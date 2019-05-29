@@ -9,6 +9,7 @@ use App\Modelos\HoraDiaLaboratorio;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\GrupoLabFormRequest;
 use DB;
+use Session;
 
 class DocenteController extends Controller
 {
@@ -70,11 +71,13 @@ class DocenteController extends Controller
     }
 
     public function crearGrupo(){
+        $id = Session::get('id');
         $auxiliares = DB::table('auxiliar')->where('ESTADO','=','1')->get();
         $materias = DB::table('docente_materia as dm')
             ->join('docente as d','d.ID_DOCENTE','=','dm.ID_DOCENTE')
             ->join('materia as m','m.ID_MATERIA','=','dm.ID_MATERIA')
-            ->where('dm.ID_DOCENTE','=','1001');
+            ->where('dm.ID_DOCENTE','=',$id);
+            // ->where('dm.ID_DOCENTE','=','1001');
         $materias = $materias->get();
         $dias =DB::table('dia')->get();
         $horas = DB::table('hora_clase')->get();
