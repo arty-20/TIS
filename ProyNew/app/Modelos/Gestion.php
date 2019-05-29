@@ -14,6 +14,8 @@ class Gestion extends Model
 
     protected $fillable =[
         'NOMBRE_GESTION',
+        'INICIO_GESTION',
+        'FIN_GESTION',
         'ESTADO'
     ]; 
 

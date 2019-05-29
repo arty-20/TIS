@@ -46,10 +46,32 @@ class GestionController extends Controller
     {
         $gestion=new Gestion;
         $gestion->NOMBRE_GESTION=$request->get('NOMBRE_GESTION');
+        $gestion->INICIO_GESTION=$request->get('INICIO_GESTION');
+        $gestion->FIN_GESTION=$request->get('FIN_GESTION');
         $gestion->ESTADO='1';
-        $gestion->save();
+        $gestionpasada= DB::table('gestion')
+        ->select('gestion.*')
+        ->where('ESTADO','=','1');
+        $gestionpasada=$gestionpasada->get();
+        $pase=true;
+        foreach ($gestionpasada as $gest) {
+            $inicio=$gest->INICIO_GESTION;
+            $fin=$gest->FIN_GESTION;
+            if(($gestion->INICIO_GESTION >= $inicio) && ($gestion->INICIO_GESTION <= $fin)){
+                $pase=false;   
+            }
+            if(($gestion->FIN_GESTION >= $inicio) && ($gestion->FIN_GESTION <= $fin)){
+                $pase=false;
+            }
+        }
+        if($pase==true){
+            $gestion->save();
+        }
         return Redirect::to('administrador/gestion');
     }
+
+    
+
     public function show($id)
     {
         return view("administrador.gestion.show",["gestion"=>Gestion::findOrFail($id)]);
@@ -62,6 +84,8 @@ class GestionController extends Controller
     {
         $gestion=Gestion::findOrFail($id);
         $gestion->NOMBRE_GESTION=$request->get('NOMBRE_GESTION');
+        $gestion->INICIO_GESTION=$request->get('INICIO_GESTION');
+        $gestion->FIN_GESTION=$request->get('FIN_GESTION');
         $gestion->update();
         return Redirect::to('administrador/gestion');
     }

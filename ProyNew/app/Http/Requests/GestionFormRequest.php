@@ -25,6 +25,8 @@ class GestionFormRequest extends FormRequest
     {
         return [
             'NOMBRE_GESTION'=>'required|max:30',
+            'INICIO_GESTION'=>'required|date',
+            'FIN_GESTION'=>'required|date'
         ];
     }
 }

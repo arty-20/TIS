@@ -1,10 +1,9 @@
 @extends ('layouts.admin')
 @section ('contenido')
-    <div>
-        <div>
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <h3>Listado de auxiliares</h3>
             <a href="auxiliar/create"><button>Crear nuevo Auxiliar</button></a>
-                        
         </div>
     </div>
 
@@ -13,8 +12,9 @@
     </div>
 
     <div class="row">
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered table-condensed table-hover">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-condensed table-hover">
                 <thead>
                     <th>Id</th>
                     <th>Nombres</th>
@@ -33,8 +33,9 @@
                 </tr>
                 @include('administrador.auxiliar.modal')
                 @endforeach
-            </table>
-        </div>
+              </table>
+            </div>
         {{$auxiliares->render()}}
+        </div>
     </div>
 @endsection
