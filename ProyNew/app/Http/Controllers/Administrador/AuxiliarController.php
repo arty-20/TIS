@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Administrador;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Auxiliar;
+use App\Modelos\Auxiliar;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\AuxiliarFormRequest;
 use DB;
@@ -52,7 +52,7 @@ class AuxiliarController extends Controller
     {
         return view("administrador.auxiliar.edit",["auxiliar"=>Auxiliar::findOrFail($id)]);
     }
-    public function update(AuxiFormRequest $request,$id)
+    public function update(AuxiliarFormRequest $request,$id)
     {
         $auxiliar=Auxiliar::findOrFail($id);
         $auxiliar->CONTRASENIA=$request->get('CONTRASENIA');

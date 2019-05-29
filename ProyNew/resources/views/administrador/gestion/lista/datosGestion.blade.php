@@ -8,7 +8,8 @@
 	<div class="table_responsive">
 		<table class="table table-striped table-bordered table-condensed table-hover">
 			<thead>
-				<th>Id de grupo de laboratorio</th>
+				<th>Grupo de laboratorio</th>
+				<th>Materia</th>
 				<th>Docente</th>
 				<th>Auxiliar</th>
 				<th>Horario</th>
@@ -16,6 +17,7 @@
 			@foreach ($lista as $li)
 			<tr>
 				<td>{{$li->ID_GRUPOLAB}}</td>
+				<td>{{$li->NOMBRE_MATERIA}}</td>
 				<td>{{$li->NOMBRE_DOCENTE.' '.$li->APELLIDO_DOCENTE}}</td>
 				<td>{{$li->NOMBRE_AUXILIAR.' '.$li->APELLIDO_AUXILIAR}}</td>
 			<td>{{$li->NOMBRE_LABORATORIO.'->'.$li->NOMBRE_DIA.'->'.$li->HORA_INICIO.'-'.$li->HORA_FIN}}</td>
@@ -24,6 +26,6 @@
 		</table>
 	</div>
 </div>
-<a href="../">Volver</a>
+<a href="../../gestion">Volver</a>
 
 @endsection

@@ -24,11 +24,12 @@ class AuxiliarFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'CONTRASENIA'=>'required|max:20',
-            'EMAIL'=>'required|max:50',
-            'NOMBRE_AUXILIAR'=>'required|max:30',
-            'APELLIDO_AUXILIAR'=>'required|max:30',
-            'CODIGO_SIS'=>'required|max:15',
+            'CONTRASENIA'=>'required_with:CONTRASENIA_CONFIRMATION|same:CONTRASENIA_CONFIRMATION|string|max:20',
+            'CONTRASENIA_CONFIRMATION'=>'max:20|string',
+            'EMAIL'=>'required|string|email|max:50|unique:auxiliar',
+            'NOMBRE_AUXILIAR'=>'required|string|max:30',
+            'APELLIDO_AUXILIAR'=>'required|string|max:30',
+            'CODIGO_SIS'=>'required|numeric|digits_between:8,15',
         ];
     }
 }

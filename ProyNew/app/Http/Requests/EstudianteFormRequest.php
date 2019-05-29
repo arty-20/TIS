@@ -24,17 +24,12 @@ class EstudianteFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'NOMBRE_ESTUDIANTE'=>'required',
-            'APELLIDO_ESTUDIANTE'=>'required',
-            'CODIGO_SIS'=>'required | numeric | min:9',
-            'EMAIL'=>'email | required',
-            'CONTRASENIA'=>'required | confirmed'
-        ];
-    }
-    public function messages(){
-        return[
-            'CODIGO_SIS.numeric'=>'El :attribute debe ser numerico',
-            'CODIGO_SIS.min'=>'El :attribute debe tener 9 digitos minimo'
+        'CONTRASENIA'=>'required_with:CONTRASENIA_CONFIRMATION|same:CONTRASENIA_CONFIRMATION|string|max:20',
+            'CONTRASENIA_CONFIRMATION'=>'max:20|string',
+            'EMAIL'=>'required|string|email|max:50|unique:docente',
+            'NOMBRE_ESTUDIANTE'=>'required|string|max:30',
+            'APELLIDO_ESTUDIANTE'=>'required|string|max:30',
+            'CODIGO_SIS'=>'required|numeric|digits_between:8,15'    
         ];
     }
 }

@@ -32,42 +32,33 @@
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Navegación</span>
           </a>
-          <!-- Navbar Right Menu -->
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-              <!-- Messages: style can be found in dropdown.less-->
-              
-              <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <!-- <small class="bg-red">Online </small> -->
-                 <i class="fa fa-fw fa-user"></i> 
-                  <span class="hidden-xs">Leticia Blanco</span>
-                  
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    
-                    <p>
-                      Correo de Contacto
-                      <small>leticia@memi.umss.edu.bo </small>
-                      <a href="#">Editar</a>
-                    </p>
-                  </li>
-                  
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    
-                    <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Cerrar Sesion</a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              
-            </ul>
-          </div>
+            <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a >
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                
+                            </li>
+                        @endif
+                    </ul>
 
         </nav>
       </header>
@@ -81,7 +72,33 @@
               <a href="#">
                 <i class="fa fa-laptop"></i>
                 <span>Materias</span>
-                <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-angle-l <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a >
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                
+                            </li>
+                        @endif
+                    </ul>eft pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li><a href="#"><i class="fa fa-circle-o"></i> Introducciónn a la Programación

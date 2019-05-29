@@ -20,11 +20,15 @@
 
         <div>
             <label for="contrasenia">Contraseña</label>
-            <input type="text" name="CONTRASENIA" placeholder="Ingrese la contrasenia">
+            <input type="password" name="CONTRASENIA" placeholder="Ingrese la contrasenia">
         </div>
         <div>
-            <label for="email">Email</label>
-            <input type="text" name="EMAIL" placeholder="Ingrese el email">
+            <label for="contrasenia">Repita la Contraseña</label>
+            <input type="password" name="CONTRASENIA_CONFIRMATION" placeholder="Repita la contrasenia">
+        </div>
+        <div>
+            <label for="EMAIL">Email</label>
+            <input type="email" name="EMAIL" placeholder="Ingrese el email">
         </div>
         <div>
             <label for="nombre">Nombres</label>
@@ -40,7 +44,7 @@
         </div>
         <div>
             <label for="codigo">Código de Docente</label>
-            <input type="text" name="CODIGO_SIS">
+            <input type="text" name="CODIGO_DOCENTE" placeholder="Ingrese el código">
         </div>
         <div>
             <button type="submit">Guardar</button>
