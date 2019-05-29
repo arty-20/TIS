@@ -1,10 +1,7 @@
 @extends('estudiante.inscripcion.sesionMateria.principal')
 @section('sesionMateria')
     <div class="row">
-      <!-- <p>{{Request::path()}}</p>
-      <p>{{public_path()}}</p> -->
-      <!-- <p>{{public_path()}} <br> </p>
-      <p>{{storage_path('app/public')}}</p> -->
+      <p>{{Carbon::now()}}</p>
     </div>
     <div class="container">
 
