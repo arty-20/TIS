@@ -8,6 +8,7 @@ class ComentarioPortafolio extends Model
 {
     protected $table='comentario_portafolio';
 
+    protected $primaryKey='ID_PORTAFOLIO';
 
     public $timestamps=false;
 
