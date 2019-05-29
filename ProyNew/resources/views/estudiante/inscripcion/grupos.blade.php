@@ -30,7 +30,7 @@
             <select class="form-control" name="ID_GRUPOLAB">
             @foreach ($grupos as $g)
                 @if($g->ESTADO_GC == 1)
-                        <option value="{{$g->ID_GRUPOLAB}}">{{$g->HORA_INICIO}} - {{$g->NOMBRE_DIA}}</option>   
+                        <option value="{{$g->ID_GRUPOLAB}}">{{$g->ID_GRUPOLAB}} - {{$g->HORA_INICIO}} - {{$g->NOMBRE_DIA}}</option>   
                 @endif
             @endforeach
             </select>

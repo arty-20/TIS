@@ -56,15 +56,21 @@ class InscripcionController extends Controller{
 
         $insc = DB::table('inscripcion')
         ->where('ID_GRUPOLAB','=',"$idgrupo");
+        $insc = $insc->get();
 
         if(count($insc)<$cant){
-            $inscripcion->save();
+            $insc1 = DB::table('inscripcion')
+            ->where('ID_ESTUDIANTE','=','100005')
+            ->where('ID_GRUPOLAB','=',$idgrupo);
+            $insc1 = $insc1->get()->first();
+            if($insc1 == null){
+                $inscripcion->save();
+            }
             return Redirect::to('estudiante/inscripcion');
         }else{
             $men = "El grupo esta lleno.";
             return view('estudiante.inscripcion.grupos',["grupoLleno"=>$men,"grupos"=>null,"id"=>null]);
         }
-        
     }
     public function listarMaterias(){
         $materias=DB::table('materia')
@@ -98,14 +104,13 @@ class InscripcionController extends Controller{
         ->where('ID_ESTUDIANTE','=','100005');
         $inscrito=$inscrito->get();
         $ban = false;
-        foreach($grupos as $g){
+        foreach($grupos as $g){ 
             foreach($inscrito as $i){
                 if((($g->ID_GRUPOLAB) == ($i->ID_GRUPOLAB))){
                     $ban = true;
                 }
             }
         }
-
         $grupos1=DB::table('grupo_laboratorio as g')
         ->join('docente_materia as dm', 'g.ID_DOC_MAT','=','dm.ID_DOCENTE_MATERIA')
         ->join('hora_dia_laboratorio as hdl','g.ID_HORARIO_LABORATORIO','=','hdl.ID_HORA_DIA_LABORATORIO')
