@@ -24,8 +24,8 @@ class ComentarioFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'ID_INSCRIPCION'=>'required',
-            'ID_PRAC_GRUPO'=>'required',
+            // 'ID_INSCRIPCION'=>'required',
+            // 'ID_PRAC_GRUPO'=>'required',
         ];
     }
 }

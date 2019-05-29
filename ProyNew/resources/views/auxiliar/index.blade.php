@@ -2,7 +2,7 @@
 @section ('contenido')
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<h3>Listado de Estudiante Grupo 1</h3>
+		<h3>Listado de Estudiante Grupo 1 - {{ $estudiantes[0]->NOMBRE_AUXILIAR }}</h3>
 		@include('auxiliar.search')
 	</div>
 </div>
@@ -27,9 +27,7 @@
 					<td>{{ $est->NOMBRE_ESTUDIANTE }}</td>
 					<td>{{ $est->APELLIDO_ESTUDIANTE }}</td>
 					<td>{{ $est->PRACTICA }}</td>
-					<td><a href="{{URL::action('estudiante\AuxiliarController1@descargar',
-												array('id'=>$est->ID_PORTAFOLIO,'ruta'=>$est->RUTA_ARCHIVO))}}"
-												class="list-group-item list-group-item-action">{{$est->RUTA_ARCHIVO}}</a></td>
+					<td><a>{{$port}}</a></td>
 					<td>{{ $est->COMENTARIO_AUXILIAR }}</td>
 					<td>
 						@if ($est->COMENTARIO_AUXILIAR === '')

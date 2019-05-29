@@ -26,7 +26,7 @@ Route::group(['middleware' => ['auth','admin']], function(){
 
 	Route::get('/administrador/horario/laboratorios/labs/{id}','Administrador\HorarioController@listar');
 	Route::get('/administrador/horario/{id}','Administrador\HorarioController@ocupado');
-	Route::resource('/administrador/horario','Administrador\HorarioController');	
+	Route::resource('/administrador/horario','Administrador\HorarioController');
 });
 
 
@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth','estudiante']], function(){
 	Route::get('estudiante/inscripcion/sesionMateria/practicaAuxiliar/{idg}/{idEstudiante}/{idins}/{idprac}','estudiante\SesionMateriaController@buscarPractica');
 	Route::get('estudiante/inscripcion/sesionMateria/portafolio/{idg}/{idEstudiante}/{idins}/{idprac}','estudiante\SesionMateriaController@buscarPortafolio');
 	Route::get('estudiante/inscripcion/sesionMateria/descargar/{id}/{archivo}', 'estudiante\SesionMateriaController@descargar');
-	Route::resource('estudiante/inscripcion/sesionMateria', 'estudiante\SesionMateriaController');	
+	Route::resource('estudiante/inscripcion/sesionMateria', 'estudiante\SesionMateriaController');
 });
 
 
@@ -57,16 +57,17 @@ Route::group(['middleware' => ['auth','docente']], function(){
 
 	Route::get('docente/grupoLaboratorio/{id}','docente\PracticaGrupoController@mostrarGrupo');
 
-	Route::resource('docente/grupoLaboratorio','docente\PracticaGrupoController');	
+	Route::resource('docente/grupoLaboratorio','docente\PracticaGrupoController');
 });
 
 
 //Pablo
 Route::group(['middleware' => ['auth','auxiliar']], function(){
-	Route::resource('auxiliar','Auxiliar\AuxiliarController1');
-	Route::resource('auxiliar/grupo2','Auxiliar\AuxiliarController2');	
-});
 
+});
+Route::resource('auxiliar','Auxiliar\AuxiliarController1');
+Route::resource('auxiliar/grupo2','Auxiliar\AuxiliarController2');
+Route::get('auxiliar/descargar/{id}/{archivo}', 'auxiliar\AuxiliarController1@descargar');
 
 Auth::routes();
 

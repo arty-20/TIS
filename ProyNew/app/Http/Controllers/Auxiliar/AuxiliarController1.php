@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use App\Estudiantes;
-use App\ComentarioPortafolio;
-//use proyecto\Estudiante;
+use App\Modelos\ComentarioPortafolio;
 use App\Auxiliar;
+use App\Portafolio;
 use App\Http\Requests\AuxiliarFormRequest;
+use App\Http\Requests\ComentarioFormRequest;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests\UpdateRequest;
 use DB;
@@ -38,10 +39,13 @@ class AuxiliarController1 extends Controller
             ->join('docente as doc', 'docmat.ID_DOCENTE', '=', 'doc.ID_DOCENTE')
             ->join('hora_clase as hrcl', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hrcl.ID_HORA')
             ->join('auxiliar as aux', 'grulab.ID_AUX', '=', 'aux.ID_AUXILIAR')
-            ->where('aux.NOMBRE_AUXILIAR','=','Arturo');
+            ->where('aux.ID_AUXILIAR','=','10001');
             $estudiantes = $estudiantes->get();
 
-            return view('auxiliar.index',["estudiantes"=>$estudiantes,"searchText"=>$query]);
+            $port=DB::table('portafolio as p');
+            $port = $port->get();
+
+            return view('auxiliar.index',["estudiantes"=>$estudiantes,"port"=>$port,"searchText"=>$query]);
         }
     }
     public function create()
@@ -66,6 +70,7 @@ class AuxiliarController1 extends Controller
     {
       $port = new ComentarioPortafolio();
       $port->COMENTARIO_AUXILIAR   = $request->get('comentario');
+      $port->RUTA_ARCHIVO = $file->getClientOriginalName();
 
       $port->save();
       return Redirect::to('auxiliar.index');
@@ -86,13 +91,13 @@ class AuxiliarController1 extends Controller
       ->join('docente as doc', 'docmat.ID_DOCENTE', '=', 'doc.ID_DOCENTE')
       ->join('hora_clase as hrcl', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hrcl.ID_HORA')
       ->join('auxiliar as aux', 'grulab.ID_AUX', '=', 'aux.ID_AUXILIAR')
-      ->where('aux.NOMBRE_AUXILIAR','=','Arturo')
+      ->where('aux.ID_AUXILIAR','=','10001')
       ->where('est.ID_ESTUDIANTE','=',"".$id."");
       $estudiantes = $estudiantes->get();
 
       return view("auxiliar.edit",["estudiante"=>$estudiantes]);
     }
-    public function update(UpdateRequest $request,$id)
+    public function update(ComentarioFormRequest $request,$id)
     {
       $port = ComentarioPortafolio::findOrFail($id);
       $port->COMENTARIO_AUXILIAR   = $request->get('comentario');
