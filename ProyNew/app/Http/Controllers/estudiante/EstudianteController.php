@@ -30,6 +30,5 @@ class EstudianteController extends Controller{
         $estudiante->ESTADO ='1';
         $estudiante->save();
         return Redirect::to('estudiante.registro');
-
     }
 }

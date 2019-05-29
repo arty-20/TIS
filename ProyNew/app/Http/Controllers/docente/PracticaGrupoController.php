@@ -4,7 +4,7 @@ namespace App\Http\Controllers\docente;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\PracticaGrupo;
+use App\Modelos\PracticaGrupo;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\PracticaGrupoFormRequest;
 use Carbon\Carbon;

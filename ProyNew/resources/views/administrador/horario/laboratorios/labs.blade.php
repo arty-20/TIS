@@ -13,7 +13,7 @@
 		<tr>
 			<td>{{$hor->NOMBRE_DIA}}</td>
 			<td>{{$hor->HORA_INICIO.'-'.$hor->HORA_FIN}}</td>
-			<td><a href=""><button>
+		<td><a href="{{URL::action('Administrador\HorarioController@ocupado',$hor->ID_HORA_DIA_LABORATORIO)}}"><button>
 				@if(($hor->DISPONIBLE)==1)
                 Ocupar
                 @elseif(($hor->DISPONIBLE)==0)

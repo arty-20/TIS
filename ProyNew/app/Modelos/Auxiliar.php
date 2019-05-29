@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Modelos;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Auxiliar extends Model
 {
-    protected $table='auxiliar';
+     protected $table='auxiliar';
 
     protected $primaryKey='ID_AUXILIAR';
 

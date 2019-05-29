@@ -20,11 +20,11 @@
 
         <div>
             <label for="contrasenia">Contraseña</label>
-            <input type="text" name="CONTRASENIA" value="{{$docente->CONTRASENIA}}">
+            <input type="password" name="CONTRASENIA" value="{{$docente->CONTRASENIA}}">
         </div>
         <div>
             <label for="email">Email</label>
-            <input type="text" name="EMAIL" value="{{$docente->EMAIL}}">
+            <input type="email" name="EMAIL" value="{{$docente->EMAIL}}">
         </div>
         <div>
             <label for="nombre">Nombres</label>
@@ -46,6 +46,6 @@
     </div>
 </div>
 <div>
-    <h4><a href="../docente">Volver</a></h4>
+    <h4><a href="/administrador/docente">Volver</a></h4>
 </div>
 @endsection

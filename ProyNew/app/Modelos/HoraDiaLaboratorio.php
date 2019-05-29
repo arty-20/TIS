@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Modelos;
 
 use Illuminate\Database\Eloquent\Model;
 
 class HoraDiaLaboratorio extends Model
 {
-    protected $table='hora_dia_laboratorio';
+   protected $table='hora_dia_laboratorio';
      
      protected $primaryKey='ID_HORA_DIA_LABORATORIO';
 

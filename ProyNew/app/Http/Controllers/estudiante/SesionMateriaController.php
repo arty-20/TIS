@@ -41,7 +41,7 @@ class SesionMateriaController extends Controller
         ->where('ID_PRAC_GRUPO','=',"$idPrac")
         ->select('ID_PORTAFOLIO');
         $portafolio = $portafolio->get()->first();
-        if(count($portafolio)==0){
+        if($portafolio==null){
             $por=new Comentario;
             $por->ID_INSCRIPCION=$idIns;
             $por->ID_PRAC_GRUPO=$idPrac;
@@ -54,14 +54,19 @@ class SesionMateriaController extends Controller
         ->where('ID_INSCRIPCION','=',$idIns)
         ->where('ID_PRAC_GRUPO','=',$idPrac);
         $portafolio1 = $portafolio1->get();
-        $idp =$portafolio->ID_PORTAFOLIO;
+        $portafolio2 = DB::table('comentario_portafolio')
+        ->where('ID_INSCRIPCION','=',"$idIns")
+        ->where('ID_PRAC_GRUPO','=',"$idPrac")
+        ->select('ID_PORTAFOLIO');
+        $portafolio2 = $portafolio2->get()->first();
+        $idp =$portafolio2->ID_PORTAFOLIO;
         $pm = DB::table('portafolio')
         ->where('ID_PORTAFOLIO','=',"$idp");
         $pm = $pm->get();
         return view('estudiante.inscripcion.sesionMateria.portafolio',[
             "sesiones"=>$sesiones,
             "portafolio1"=>$portafolio1,
-            "idpor"=>$portafolio->ID_PORTAFOLIO,
+            "idpor"=>$portafolio2->ID_PORTAFOLIO,
             "paquete"=>$pm]);
     }
     public function buscarPractica($idGrupo, $idEstudiante,$idIns, $idPrac){
