@@ -34,7 +34,7 @@ class DocenteController extends Controller
     public function store (DocenteFormRequest $request)
     {
         $docente=new Docente;
-        $docente->CONTRASENIA=$request->get('CONTRASENIA');
+        $docente->CONTRASENIA=bcrypt($request->get('CONTRASENIA'));
         $docente->EMAIL=$request->get('EMAIL');
         $docente->NOMBRE_DOCENTE=$request->get('NOMBRE_DOCENTE');
         $docente->APELLIDO_DOCENTE=$request->get('APELLIDO_DOCENTE');

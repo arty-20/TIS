@@ -13,11 +13,13 @@
             <table class="table table-striped table-bordered table-condensed table-hover">
                 <thead>
                     <th>Nombre</th>
+                    <th>Periodo</th>
                     <th>Acciones</th>
                 </thead>
                 @foreach ($gestiones as $doc)
                 <tr>
                     <td>{{ $doc->NOMBRE_GESTION}}</td>
+                    <td>{{$doc->INICIO_GESTION.' -> '.$doc->FIN_GESTION}}</td>
                     <td>
                     <a href="{{URL::action('Administrador\GestionController@listGestion',$doc->ID_GESTION)}}"><button class="btn btn-info">Ver Gestión</button></a>
                     <a href="{{URL::action('Administrador\GestionController@edit',$doc->ID_GESTION)}}"><button class="btn btn-info">Editar</button></a>

@@ -1,5 +1,6 @@
-@extends('layouts.admin')
-@section('contenido')
+
+@extends('administrador.horario.index')
+@section('labos')
 <div class="row">
 	{{$horario->render()}}
 <div class="table-responsive">

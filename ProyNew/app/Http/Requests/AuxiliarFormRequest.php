@@ -24,8 +24,8 @@ class AuxiliarFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'CONTRASENIA'=>'required_with:CONTRASENIA_CONFIRMATION|same:CONTRASENIA_CONFIRMATION|string|max:20',
-            'CONTRASENIA_CONFIRMATION'=>'max:20|string',
+            'CONTRASENIA'=>'required_with:CONTRASENIA_CONFIRMATION|same:CONTRASENIA_CONFIRMATION|string|max:191',
+            'CONTRASENIA_CONFIRMATION'=>'max:191|string',
             'EMAIL'=>'required|string|email|max:50|unique:auxiliar',
             'NOMBRE_AUXILIAR'=>'required|string|max:30',
             'APELLIDO_AUXILIAR'=>'required|string|max:30',

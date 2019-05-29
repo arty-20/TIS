@@ -35,7 +35,7 @@ class AuxiliarController extends Controller
     public function store (AuxiliarFormRequest $request)
     {
         $auxiliar=new Auxiliar;
-        $auxiliar->CONTRASENIA=$request->get('CONTRASENIA');
+        $auxiliar->CONTRASENIA=bcrypt($request->get('CONTRASENIA'));
         $auxiliar->EMAIL=$request->get('EMAIL');
         $auxiliar->NOMBRE_AUXILIAR=$request->get('NOMBRE_AUXILIAR');
         $auxiliar->APELLIDO_AUXILIAR=$request->get('APELLIDO_AUXILIAR');

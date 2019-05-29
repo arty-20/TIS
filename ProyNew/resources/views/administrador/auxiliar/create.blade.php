@@ -20,27 +20,27 @@
 
         <div>
             <label for="contrasenia">Contraseña</label>
-            <input type="password" name="CONTRASENIA" placeholder="Ingrese la contrasenia">
+            <input type="password" class="form-control" name="CONTRASENIA" placeholder="Ingrese la contrasenia">
         </div>
         <div>
             <label for="contrasenia">Repita la Contraseña</label>
-            <input type="password" name="CONTRASENIA_CONFIRMATION" placeholder="Repita la contrasenia">
+            <input type="password" class="form-control" name="CONTRASENIA_CONFIRMATION" placeholder="Repita la contrasenia">
         </div>
         <div>
             <label for="email">Email</label>
-            <input type="email" name="EMAIL" placeholder="Ingrese el email">
+            <input type="email" class="form-control" name="EMAIL" placeholder="Ingrese el email">
         </div>
         <div>
             <label for="nombre">Nombres</label>
-            <input type="text" name="NOMBRE_AUXILIAR" placeholder="Ingrese el/los nombre/s">
+            <input type="text" class="form-control" name="NOMBRE_AUXILIAR" placeholder="Ingrese el/los nombre/s">
         </div>
         <div>
             <label for="apellido">Apellidos</label>
-            <input type="text" name="APELLIDO_AUXILIAR" placeholder="Ingrese los apellidos">
+            <input type="text" class="form-control" name="APELLIDO_AUXILIAR" placeholder="Ingrese los apellidos">
         </div>
         <div>
             <label for="codigo">Código SIS</label>
-            <input type="text" name="CODIGO_SIS" placeholder="Ingrese el código SIS">
+            <input type="text" class="form-control" name="CODIGO_SIS" placeholder="Ingrese el código SIS">
         </div>
         <div>
             <button type="submit">Guardar</button>
