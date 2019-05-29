@@ -89,8 +89,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="gestion"><i class="fa fa-circle-o"></i>Gestiones</a></li>
-                <li><a href="materia"><i class="fa fa-circle-o"></i>Materias</a></li>
+                <li><a href="{{asset('administrador/gestion')}}"><i class="fa fa-circle-o"></i>Gestiones</a></li>
+                <li><a href="{{asset('administrador/materia')}}"><i class="fa fa-circle-o"></i>Materias</a></li>
               </ul>
             </li>
             
@@ -101,7 +101,7 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="horario"><i class="fa fa-circle-o"></i>Sesiones de laboratorio</a></li>
+                <li><a href="{{asset('administrador/horario')}}"><i class="fa fa-circle-o"></i>Sesiones de laboratorio</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -111,9 +111,9 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="docente"><i class="fa fa-circle-o"></i> Docentes</a></li>
-                <li><a href="auxiliar"><i class="fa fa-circle-o"></i> Auxiliares</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Estudiantes</a></li>
+                <li><a href="{{asset('administrador/docente')}}"><i class="fa fa-circle-o"></i> Docentes</a></li>
+                <li><a href="{{asset('administrador/auxiliar')}}"><i class="fa fa-circle-o"></i> Auxiliares</a></li>
+                <li><a href="{{asset('administrador/estudiante')}}"><i class="fa fa-circle-o"></i> Estudiantes</a></li>
               </ul>
             </li>
                        

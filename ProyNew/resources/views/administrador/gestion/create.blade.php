@@ -30,6 +30,6 @@
     </div>
 </div>
 <div>
-    <h4><a href="../gestion">Volver</a></h4>
+    <h4><a href="/administrador/gestion">Volver</a></h4>
 </div>
 @endsection

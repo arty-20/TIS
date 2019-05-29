@@ -23,8 +23,8 @@
             <input type="password" name="CONTRASENIA" placeholder="Ingrese la contrasenia">
         </div>
         <div>
-            <label for="contrasenia">Confirme la Contraseña</label>
-            <input type="password" name="CONTRASENIA" placeholder="Ingrese la contrasenia">
+            <label for="contrasenia">Repita la Contraseña</label>
+            <input type="password" name="CONTRASENIA_CONFIRMATION" placeholder="Repita la contrasenia">
         </div>
         <div>
             <label for="email">Email</label>
