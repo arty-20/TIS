@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class DocenteMiddleware
 {
@@ -15,6 +16,18 @@ class DocenteMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if (Auth::user()->role == 2 ) {
+            return $next($request);
+        }
+        
+        if (Auth::user()->role == 1) {
+            return redirect('administrador/horario');
+        } 
+        if (Auth::user()->role == 3) {
+            return redirect('auxiliar');
+        } 
+        if (Auth::user()->role == 4) {
+            return redirect('estudiante/inscripcion');
+        } 
     }
 }

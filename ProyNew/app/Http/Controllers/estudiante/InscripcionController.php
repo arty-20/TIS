@@ -18,7 +18,7 @@ class InscripcionController extends Controller{
     }
 
     public function index(){
-        // $id = Session::get('id');
+         $id = Session::get('id');
         $gruposInscrito=DB::table('inscripcion as ins')
         ->join('grupo_laboratorio as gc','gc.ID_GRUPOLAB','=','ins.ID_GRUPOLAB')
         ->join('hora_dia_laboratorio as hdl','gc.ID_HORARIO_LABORATORIO','=','hdl.ID_HORA_DIA_LABORATORIO')
@@ -29,8 +29,8 @@ class InscripcionController extends Controller{
         ->join('dia as d','d.ID_DIA','=','hdl.ID_DIA')
         ->join('hora_clase as hc','hc.ID_HORA','=','hdl.ID_HORA')
         ->where('ESTADO_GC','=','1')
-        // ->where('ID_ESTUDIANTE','=', $id);
-        ->where('ID_ESTUDIANTE','=', '100004');
+         ->where('ID_ESTUDIANTE','=', $id);
+        //->where('ID_ESTUDIANTE','=', '100004');
         $gruposInscrito = $gruposInscrito->get();
         return view('estudiante.inscripcion.index',["gruposInscrito"=>$gruposInscrito]);
     }
@@ -38,11 +38,11 @@ class InscripcionController extends Controller{
         return view("estudiante.inscripcion.index");
     }
     public function store(InscripcionFormRequest $request ){
-        // $id = Session::get('id');
+         $id = Session::get('id');
         $bandera = false;
         $inscripcion = new Inscripcion;
-        // $inscripcion->ID_ESTUDIANTE = "$id";
-        $inscripcion->ID_ESTUDIANTE = '100004';
+         $inscripcion->ID_ESTUDIANTE = "$id";
+        //$inscripcion->ID_ESTUDIANTE = '100004';
         $idgrupo=$request->get('ID_GRUPOLAB');
 
         $iddoc = $request->get('ID_DOC_MAT');
@@ -52,8 +52,8 @@ class InscripcionController extends Controller{
         ->where('ID_DOC_MAT','=',"$iddoc");
         $grupo_inscrito = $grupo_inscrito->get();
         $inscrito = DB::table('inscripcion')
-        // ->where('ID_ESTUDIANTE','=',"$id");
-        ->where('ID_ESTUDIANTE','=','100004');
+         ->where('ID_ESTUDIANTE','=',"$id");
+        //->where('ID_ESTUDIANTE','=','100004');
         $inscrito=$inscrito->get();
         foreach($grupo_inscrito as $g){
             foreach($inscrito as $i){

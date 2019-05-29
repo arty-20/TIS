@@ -13,6 +13,7 @@ use App\Http\Requests\AuxiliarFormRequest;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests\UpdateRequest;
 use DB;
+use Session;
 
 
 class AuxiliarController1 extends Controller
