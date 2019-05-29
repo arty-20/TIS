@@ -46,14 +46,22 @@ Route::get('estudiante/inscripcion/sesionMateria/descargar/{id}/{archivo}', 'est
 Route::resource('estudiante/inscripcion/sesionMateria', 'estudiante\SesionMateriaController');
 
 //Clara
+
+
+Route::get('docente/agregarMateria/{id}','docente\DocenteController@agregarMateria');
 Route::get('docente/grupos/{id}/{id2}','docente\DocenteController@listarGrupos');
 Route::get('docente/grupoLaboratorio/{id}','docente\DocenteController@mostrarGrupo');
 Route::get('docente/grupoLaboratorio/listaEstudiantes/grupo_{id}','docente\DocenteController@listarEstudiantes');
-Route::get('docente/crearGrupo','docente\DocenteController@crearGrupo');
-Route::resource('docente/index','docente\DocenteController');
+Route::get('docente/crearGrupo/{id}','docente\DocenteController@crearGrupo');
+Route::get('/findDia','docente\DocenteController@findDia');
+Route::get('/findHoras','docente\DocenteController@findHoras');
+
+Route::resource('docente','docente\DocenteController');
+
+
+Route::resource('docente/materias','docente\DocenteMateriaController');
 
 Route::get('docente/grupoLaboratorio/{id}','docente\PracticaGrupoController@mostrarGrupo');
-
 Route::resource('docente/grupoLaboratorio','docente\PracticaGrupoController');
 
 //Pablo

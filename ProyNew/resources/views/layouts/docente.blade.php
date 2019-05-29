@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
     <link rel="stylesheet" href="{{asset('css/AdminLTE.min.css')}}">
-   
+    <link rel="stylesheet" href="{{asset('css/docente.css')}}">
     <link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/_all-skins.min.css')}}">
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
@@ -71,6 +71,26 @@
 
         </nav>
       </header>
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+                    
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header"></li>
+            
+             @yield('arbol')
+            
+            
+            
+           
+                        
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
       <!-- Left side column. contains the logo and sidebar -->
      <!-- <aside class="main-sidebar">
         <section class="sidebar">
@@ -149,9 +169,12 @@
       
     <!-- jQuery 2.1.4 -->
     <script src="{{asset('js/jQuery-2.1.4.min.js')}}"></script>
-    @stack('scripts')
-    <!-- Bootstrap 3.3.5 -->
+   <script src="{{asset('js/jquery.min.js')}}"></script>
+       <!-- Bootstrap 3.3.5 -->
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
+
+   
+    
     <!-- AdminLTE App -->
     <script src="{{asset('js/app.min.js')}}"></script>
     

@@ -19,7 +19,7 @@ class PracticaGrupoController extends Controller
 
 
     public function store(PracticaGrupoFormRequest $request){
-
+        $idDocente = '1001';
 	   	$practica = new PracticaGrupo;
     	$id = $request->get('ID_PRAC_GRUPO');
         $practica->ID_GRUPOLAB = $id;
@@ -41,14 +41,13 @@ class PracticaGrupoController extends Controller
 
         if(Input::hasFile('archivo')){
             $file = Input::file('archivo');
-            $file->move(public_path()."/archivosTIS/sesiones/$id/", $file->getClientOriginalName());
+            $file->move(public_path()."/archivosTIS/docente/$idDocente/$id", $file->getClientOriginalName());
 
             $practica->PRACTICA = $file->getClientOriginalName();
         }
         $practica->save();
 
-		return redirect()->action(
-			    'docente\PracticaGrupoController@mostrarGrupo', ['id' => $id]
+		return redirect()->action('docente\PracticaGrupoController@mostrarGrupo', ['id' => $id]
 			);
 
 
@@ -68,14 +67,27 @@ class PracticaGrupoController extends Controller
             ->where('gLab.ID_GRUPOLAB','=',$id)
             ->groupBy('gLab.ID_GRUPOLAB','m.NOMBRE_MATERIA','a.NOMBRE_AUXILIAR','a.APELLIDO_AUXILIAR','gLab.ESTADO_GC','d.NOMBRE_DIA','h.HORA_INICIO','h.HORA_FIN')
             ->first();
+
      	$sesiones = DB::table('practica_grupo as pG')
 			->join('grupo_laboratorio as gLab','pG.ID_GRUPOLAB','=','gLab.ID_GRUPOLAB')
 			->select('pG.ID_GRUPOLAB')
 			->where('pG.ID_GRUPOLAB','=',$id)
    			->count();
 
+        $practicas =DB::table('practica_grupo as pG')
+            ->join('grupo_laboratorio as gLab','pG.ID_GRUPOLAB','=','gLab.ID_GRUPOLAB')
+            ->select('gLab.ID_GRUPOLAB','pG.NOMBRE_SESION','pG.FECHA','pG.PRACTICA')
+            ->groupBy('gLab.ID_GRUPOLAB','pG.NOMBRE_SESION','pG.FECHA','pG.PRACTICA')
+            ->where('pG.ID_GRUPOLAB','=',$id)
+            ->get();
 
-        return view("docente.grupoLaboratorio.mostrarGrupo",["grupoLaboratorio"=>$grupoLaboratorio,"sesiones"=>$sesiones,"idLab"=>$id]);
+        $estudiantes=DB::table('inscripcion as estLab')
+                    ->join('estudiante as e','estLab.ID_ESTUDIANTE','=','e.ID_ESTUDIANTE')
+                    ->select('estLab.ID_GRUPOLAB','estLab.ID_ESTUDIANTE','e.CODIGO_SIS','e.NOMBRE_ESTUDIANTE','e.APELLIDO_ESTUDIANTE',DB::raw('CONCAT(e.NOMBRE_ESTUDIANTE," ",e.APELLIDO_ESTUDIANTE) as ESTUDIANTE'))
+                    ->where('estLab.ID_GRUPOLAB','=',$id)
+                    ->get();
+
+        return view("docente.grupoLaboratorio.mostrarGrupo",["grupoLaboratorio"=>$grupoLaboratorio,"sesiones"=>$sesiones,"estudiantes"=>$estudiantes,"practicas"=>$practicas, "idLab"=>$id]);
 
 
     }
