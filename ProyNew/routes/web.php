@@ -59,3 +59,7 @@ Route::resource('docente/grupoLaboratorio','docente\PracticaGrupoController');
 //Pablo
 Route::resource('auxiliar','Auxiliar\AuxiliarController1');
 Route::resource('auxiliar/grupo2','Auxiliar\AuxiliarController2');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
