@@ -24,6 +24,7 @@ class AuxiliarController1 extends Controller
     }
     public function index(Request $request)
     {
+      $id = Session::get('id');
         if ($request)
         {
             $query=trim($request->get('searchText'));
@@ -38,7 +39,8 @@ class AuxiliarController1 extends Controller
             ->join('docente as doc', 'docmat.ID_DOCENTE', '=', 'doc.ID_DOCENTE')
             ->join('hora_clase as hrcl', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hrcl.ID_HORA')
             ->join('auxiliar as aux', 'grulab.ID_AUX', '=', 'aux.ID_AUXILIAR')
-            ->where('aux.NOMBRE_AUXILIAR','=','Arturo');
+            ->where('aux.ID_AUXILIAR','=',"".$id."");
+            //->where('aux.NOMBRE_AUXILIAR','=','Arturo');
             $estudiantes = $estudiantes->get();
 
             return view('auxiliar.index',["estudiantes"=>$estudiantes,"searchText"=>$query]);
@@ -46,6 +48,7 @@ class AuxiliarController1 extends Controller
     }
     public function create()
     {
+      $id = Session::get('id');
       $estudiantes=DB::table('comentario_portafolio as cp')
       ->join('inscripcion as ins', 'cp.ID_INSCRIPCION', '=', 'ins.ID_INSCRIPCION')
       ->join('practica_grupo as pgru', 'cp.ID_PRAC_GRUPO', '=', 'pgru.ID_PRAC_GRUPO')
@@ -56,6 +59,7 @@ class AuxiliarController1 extends Controller
       ->join('docente as doc', 'docmat.ID_DOCENTE', '=', 'doc.ID_DOCENTE')
       ->join('hora_clase as hrcl', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hrcl.ID_HORA')
       ->join('auxiliar as aux', 'grulab.ID_AUX', '=', 'aux.ID_AUXILIAR')
+      //->where('aux.ID_AUXILIAR','=',"".$id."");
       ->where('aux.NOMBRE_AUXILIAR','=','Arturo');
       // ->where('est.ID_ESTUDIANTE','=',"".$id."");
       $estudiantes = $estudiantes->get();
@@ -76,6 +80,7 @@ class AuxiliarController1 extends Controller
     }
     public function edit($id)
     {
+      $ida = Session::get('id');
       $estudiantes=DB::table('comentario_portafolio as cp')
       ->join('inscripcion as ins', 'cp.ID_INSCRIPCION', '=', 'ins.ID_INSCRIPCION')
       ->join('practica_grupo as pgru', 'cp.ID_PRAC_GRUPO', '=', 'pgru.ID_PRAC_GRUPO')
@@ -86,9 +91,10 @@ class AuxiliarController1 extends Controller
       ->join('docente as doc', 'docmat.ID_DOCENTE', '=', 'doc.ID_DOCENTE')
       ->join('hora_clase as hrcl', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hrcl.ID_HORA')
       ->join('auxiliar as aux', 'grulab.ID_AUX', '=', 'aux.ID_AUXILIAR')
-      ->where('aux.NOMBRE_AUXILIAR','=','Arturo')
-      ->where('est.ID_ESTUDIANTE','=',"".$id."");
-      $estudiantes = $estudiantes->get();
+      //->where('cp.ID_INSCRIPCION','=', ''.$id);
+      ->where('aux.ID_AUXILIAR','=',"".$ida."");
+      //->where('est.ID_ESTUDIANTE','=',"".$id."");
+      $estudiantes = $estudiantes->get()->first();
 
       return view("auxiliar.edit",["estudiante"=>$estudiantes]);
     }

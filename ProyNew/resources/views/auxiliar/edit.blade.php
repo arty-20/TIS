@@ -3,14 +3,14 @@
 <div class="row">
 	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
 		<h3>Comentario de Auxiliar en Portafolio de Session de
-			{{ $estudiante[0]->NOMBRE_ESTUDIANTE }} {{ $estudiante[0]->APELLIDO_ESTUDIANTE }}
-		{{$estudiante[0]->ID_PORTAFOLIO}}</h3>
+			{{ $estudiante->NOMBRE_ESTUDIANTE }} {{ $estudiante->APELLIDO_ESTUDIANTE }}
+		{{$estudiante->ID_PORTAFOLIO}}</h3>
 	</div>
 </div>
 
-{!!Form::model($estudiante,['method'=>'PATCH','route'=>['auxiliar.update',$estudiante[0]->ID_PORTAFOLIO]])!!}
+{!!Form::model($estudiante,['method'=>'PATCH','route'=>['auxiliar.update',$estudiante->ID_INSCRIPCION]])!!}
 <div class="form-group">
-  <textarea class="form-control" name="comentario" rows="5" value="">{{ $estudiante[0]->COMENTARIO_AUXILIAR }}</textarea>
+  <textarea class="form-control" name="comentario" rows="5" value="">{{ $estudiante->COMENTARIO_AUXILIAR }}</textarea>
   <br>
   <div class="form-group row">
     <div class="col-md-2">
