@@ -29,6 +29,6 @@
     </div>
 </div>
 <div>
-    <h4><a href="../materia">Volver</a></h4>
+    <h4><a href="/administrador/materia">Volver</a></h4>
 </div>
 @endsection

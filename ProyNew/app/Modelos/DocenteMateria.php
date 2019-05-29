@@ -6,16 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class DocenteMateria extends Model
 {
-    protected $table='docente_materia';
-     
-     protected $primaryKey='ID_DOCENTE_MATERIA';
+     protected $table= 'docente_materia';
 
-     public $timestamps=false;
+    protected $primaryKey='ID_DOCENTE_MATERIA';
 
-     protected $fillable =[
+    public $timestamps=false;
+
+    protected $fillable=[
         'ID_MATERIA',
-        'ID_DOCENTE'
-     ];
-     protected $guarded = [
-     ];
+        'ID_DOCENTE',
+    ];
+>>>>>>> origin/pablo
 }

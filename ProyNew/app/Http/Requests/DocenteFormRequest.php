@@ -4,7 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EstudianteFormRequest extends FormRequest
+
+class DocenteFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,9 +28,10 @@ class EstudianteFormRequest extends FormRequest
         'CONTRASENIA'=>'required_with:CONTRASENIA_CONFIRMATION|same:CONTRASENIA_CONFIRMATION|string|max:20',
             'CONTRASENIA_CONFIRMATION'=>'max:20|string',
             'EMAIL'=>'required|string|email|max:50|unique:docente',
-            'NOMBRE_ESTUDIANTE'=>'required|string|max:30',
-            'APELLIDO_ESTUDIANTE'=>'required|string|max:30',
-            'CODIGO_SIS'=>'required|numeric|digits_between:8,15'    
+            'NOMBRE_DOCENTE'=>'required|string|max:30',
+            'APELLIDO_DOCENTE'=>'required|string|max:30',
+            'TELEFONO'=>'numeric',
+            'CODIGO_DOCENTE'=>'required|max:10'
         ];
     }
 }
