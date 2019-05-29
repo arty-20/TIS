@@ -53,34 +53,19 @@ class InscripcionController extends Controller{
         $grupoLab = $grupoLab->get()->first();
         $cant = $grupoLab->CANTIDAD_ESTUDIANTES;
 
-<<<<<<< HEAD
         $insc = DB::table('inscripcion')
         ->where('ID_GRUPOLAB','=',"$idgrupo");
         $insc = $insc->get(); 
 
         if(count($insc)<$cant){
             $insc1 = DB::table('inscripcion')
-            ->where('ID_ESTUDIANTE','=',"$id");
+            ->where('ID_ESTUDIANTE','=',"$id")
             ->where('ID_GRUPOLAB','=',$idgrupo);
             $insc1 = $insc1->get()->first();
             if($insc1 == null){
                 $inscripcion->save();
 
-        //         $grupo_inscrito = DB::table('grupo_laboratorio')
-        // ->where('ID_DOC_MAT','=',"$iddoc");
-        // $grupo_inscrito = $grupo_inscrito->get();
-        // $inscrito = DB::table('inscripcion')
-        //  ->where('ID_ESTUDIANTE','=',"$id");
-        // //->where('ID_ESTUDIANTE','=','100004');
-        // $inscrito=$inscrito->get();
-        // foreach($grupo_inscrito as $g){
-        //     foreach($inscrito as $i){
-        //         if((($g->ID_GRUPOLAB) == ($i->ID_GRUPOLAB))){
-        //             $bandera = true;
-        //         }
-=======
         
->>>>>>> origin/jessicka
             }
             return Redirect::to('estudiante/inscripcion');
         }else{
