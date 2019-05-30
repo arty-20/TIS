@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth','admin']], function(){
 
 //Arturo
 Route::group(['middleware' => ['auth','estudiante']], function(){
-	
+
 
 	Route::get('estudiante/inscripcion/listarMaterias','estudiante\InscripcionController@listarMaterias');
 	Route::get('estudiante/inscripcion/{id}','estudiante\InscripcionController@listarDocentesDeLaMateria');
@@ -64,12 +64,12 @@ Route::group(['middleware' => ['auth','docente']], function(){
 
 //Pablo
 Route::group(['middleware' => ['auth','auxiliar']], function(){
-  Route::resource('auxiliar','Auxiliar\AuxiliarController1'); 
-  Route::resource('auxiliar/grupo2','Auxiliar\AuxiliarController2');
-  Route::get('auxiliar/descargar/{id}/{archivo}', 'Auxiliar\AuxiliarController1@descargar');
+
 });
 
-
+Route::resource('auxiliar','Auxiliar\AuxiliarController1');
+Route::resource('auxiliar/grupo2','Auxiliar\AuxiliarController2');
+Route::get('auxiliar/descargar/{id}/{archivo}', 'Auxiliar\AuxiliarController1@descargar');
 
 Auth::routes();
 
