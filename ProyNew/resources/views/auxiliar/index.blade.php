@@ -27,10 +27,12 @@
 					<td>{{ $est->NOMBRE_ESTUDIANTE }}</td>
 					<td>{{ $est->APELLIDO_ESTUDIANTE }}</td>
 					<td>{{ $est->PRACTICA }}</td>
-					<td><a>{{$port}}</a></td>
+					<td><a href="{{URL::action('Auxiliar\AuxiliarController1@descargar',
+	                  array('id'=>$est->ID_PORTAFOLIO,'ruta'=>$port[0]->RUTA_ARCHIVO))}}"
+	                  class="list-group-item list-group-item-action">{{$port[0]->RUTA_ARCHIVO}}</a></td>
 					<td>{{ $est->COMENTARIO_AUXILIAR }}</td>
 					<td>
-						@if ($est->COMENTARIO_AUXILIAR === '')
+						@if ($est->PRACTICA !== '')
 							Entregado
 						@else
 							No Entregado
@@ -40,13 +42,13 @@
 						<div class="row">
 							@if ($est->COMENTARIO_AUXILIAR !== '')
 							<div class="col-md-5">
-								<a href="{{ route('auxiliar.edit',$est->ID_ESTUDIANTE) }}" class="btn btn-primary material-icons"
+								<a href="{{ route('auxiliar.edit',$est->ID_PRAC_GRUPO) }}" class="btn btn-primary material-icons"
 									style="color: white" data-toggle="tooltip" data-placement="top" title="Editar">edit</a>
 		            </a>
 							</div>
 							@else
 							<div class="col-md-5">
-								<a href="{{ route('auxiliar.edit',$est->ID_ESTUDIANTE) }}" class="btn btn-warning material-icons" style="color: white"
+								<a href="{{ route('auxiliar.edit',$est->ID_PRAC_GRUPO) }}" class="btn btn-warning material-icons" style="color: white"
                   data-toggle="tooltip" data-placement="top" title="Comentar">announcement</a>
 		            </a>
 							</div>

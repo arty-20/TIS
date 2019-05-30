@@ -8,6 +8,7 @@ class Portafolio extends Model
 {
     protected $table='portafolio';
 
+    protected $primaryKey='ID_PORTAFOLIO';
 
     public $timestamps=false;
 
@@ -15,7 +16,7 @@ class Portafolio extends Model
        'ID_PORTAFOLIO',
        'RUTA_ARCHIVO',
        'ID_GESTION'
-    ]; 
+    ];
 
     protected $guarded =[
 
