@@ -13,6 +13,10 @@ use App\Http\Requests\AuxiliarFormRequest;
 use App\Http\Requests\ComentarioFormRequest;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests\UpdateRequest;
+
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\File;
+
 use DB;
 use Session;
 
@@ -114,7 +118,7 @@ class AuxiliarController1 extends Controller
     }
     public function descargar($id, $archivo){
         $public_path = public_path();
-        $url = $public_path."/archivosTIS/$id/".$archivo;
+        $url = $public_path."/archivosTIS/1/".$archivo;
         return response()->download($url);
     }
 }

@@ -28,8 +28,8 @@
 					<td>{{ $est->APELLIDO_ESTUDIANTE }}</td>
 					<td>{{ $est->PRACTICA }}</td>
 					<td><a href="{{URL::action('Auxiliar\AuxiliarController1@descargar',
-	                  array('id'=>$est->ID_PORTAFOLIO,'ruta'=>$port[0]->RUTA_ARCHIVO))}}"
-	                  class="list-group-item list-group-item-action">{{$port[0]->RUTA_ARCHIVO}}</a></td>
+	                  array('id'=>$est->ID_PORTAFOLIO,'archivo'=>$est->PRACTICA))}}"
+	                  class="list-group-item list-group-item-action">{{$est->PRACTICA}}</a></td>
 					<td>{{ $est->COMENTARIO_AUXILIAR }}</td>
 					<td>
 						@if ($est->PRACTICA !== '')
