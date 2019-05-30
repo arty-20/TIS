@@ -8,7 +8,7 @@
 	</div>
 </div>
 
-{!!Form::model($estudiante,['method'=>'PATCH','route'=>['auxiliar.update',$estudiante[0]->ID_INSCRIPCION]])!!}
+{!!Form::model($estudiante,['method'=>'PATCH','route'=>['auxiliar.update',$estudiante[0]->ID_PORTAFOLIO]])!!}
 <div class="form-group">
   <textarea class="form-control" name="comentario" rows="5" value="">{{ $estudiante[0]->COMENTARIO_AUXILIAR }}</textarea>
   <br>
