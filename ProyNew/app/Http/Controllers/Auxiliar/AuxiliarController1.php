@@ -100,7 +100,10 @@ class AuxiliarController1 extends Controller
       ->join('auxiliar as aux', 'grulab.ID_AUX', '=', 'aux.ID_AUXILIAR')
       //->where('cp.ID_INSCRIPCION','=', ''.$id);
       //->where('aux.ID_AUXILIAR','=',"".$ida."");
-      ->where('est.ID_ESTUDIANTE','=',"".$id."");
+      //->where('est.ID_ESTUDIANTE','=',"".$id."")
+      ->where('aux.ID_AUXILIAR','=','10001')
+      ->where('pgru.ID_PRAC_GRUPO','=',"".$id."")
+      ;
       $estudiantes = $estudiantes->get();
 
       return view("auxiliar.edit",["estudiante"=>$estudiantes]);
