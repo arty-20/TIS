@@ -51,7 +51,7 @@ class LoginController extends Controller
                 return 'administrador/horario'; 
             break;
             case 2:
-                return 'docente/index';
+                return 'docente';
             break; 
             case 3:
                 return 'auxiliar';

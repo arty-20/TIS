@@ -62,67 +62,7 @@
 
         </nav>
       </header>
-      <!-- Left side column. contains the logo and sidebar -->
-     <!-- <aside class="main-sidebar">
-        <section class="sidebar">
-         <ul class="sidebar-menu">
-            <li class="header"></li>
-            
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>Materias</span>
-                <i class="fa fa-angle-l <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a >
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                
-                            </li>
-                        @endif
-                    </ul>eft pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Introducciónn a la Programación
-                  <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                </a>
-                <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Grupo 1 </a></li>
-                <li class="treeview">
-                  <a href="#"><i class="fa fa-circle-o"></i> Grupo 2 </a>
-                </li>
-              </ul>
-              </li>
-                         </ul>
-            </li>
-            
-            
-          </ul>
-        </section>
-       </aside>
-    -->
-
-
+    
     <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -156,13 +96,7 @@
       </div><!-- /.content-wrapper -->
     </div>
       <!--Fin-Contenido-->
-      <!-- <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.0
-        </div>
-        <strong>Copyright &copy; 2015-2020 <a href="www.incanatoit.com">IncanatoIT</a>.</strong> All rights reserved.
-      </footer>
- -->
+      
       
     <!-- jQuery 2.1.4 -->
     <script src="{{asset('js/jQuery-2.1.4.min.js')}}"></script>

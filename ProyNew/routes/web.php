@@ -50,15 +50,15 @@ Route::group(['middleware' => ['auth','estudiante']], function(){
 
 //Clara
 Route::group(['middleware' => ['auth','docente']], function(){
-	Route::get('docente/grupos/{id}/{id2}','docente\DocenteController@listarGrupos');
-	Route::get('docente/grupoLaboratorio/{id}','docente\DocenteController@mostrarGrupo');
-	Route::get('docente/grupoLaboratorio/listaEstudiantes/grupo_{id}','docente\DocenteController@listarEstudiantes');
-	Route::get('docente/crearGrupo','docente\DocenteController@crearGrupo');
-	Route::resource('docente/index','docente\DocenteController');
+	// Route::get('docente/grupos/{id}/{id2}','docente\DocenteController@listarGrupos');
+	// Route::get('docente/grupoLaboratorio/{id}','docente\DocenteController@mostrarGrupo');
+	// Route::get('docente/grupoLaboratorio/listaEstudiantes/grupo_{id}','docente\DocenteController@listarEstudiantes');
+	// Route::get('docente/crearGrupo','docente\DocenteController@crearGrupo');
+	Route::resource('docente','docente\DocenteController');
 
-	Route::get('docente/grupoLaboratorio/{id}','docente\PracticaGrupoController@mostrarGrupo');
+	// Route::get('docente/grupoLaboratorio/{id}','docente\PracticaGrupoController@mostrarGrupo');
 
-	Route::resource('docente/grupoLaboratorio','docente\PracticaGrupoController');	
+	// Route::resource('docente/grupoLaboratorio','docente\PracticaGrupoController');	
 });
 
 
