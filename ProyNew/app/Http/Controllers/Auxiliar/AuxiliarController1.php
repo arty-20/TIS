@@ -42,9 +42,11 @@ class AuxiliarController1 extends Controller
             ->join('docente_materia as docmat', 'grulab.ID_DOC_MAT', '=', 'docmat.ID_DOCENTE_MATERIA')
             ->join('materia as mat', 'docmat.ID_MATERIA', '=', 'mat.ID_MATERIA')
             ->join('docente as doc', 'docmat.ID_DOCENTE', '=', 'doc.ID_DOCENTE')
-            ->join('hora_clase as hrcl', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hrcl.ID_HORA')
+            //->join('hora_dia_laboratorio as hd', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hd.ID_HORA_DIA_LABORATORIO')
+            //->join('hora_clase as hrcl', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hrcl.ID_HORA')
             ->join('auxiliar as aux', 'grulab.ID_AUX', '=', 'aux.ID_AUXILIAR')
-            ->where('aux.ID_AUXILIAR','=','10001');
+            ->where('aux.ID_AUXILIAR','=',"".$id."");
+            //->where('aux.ID_AUXILIAR','=','10002');
             //->where('aux.NOMBRE_AUXILIAR','=','Arturo');
             $estudiantes = $estudiantes->get();
 
@@ -96,12 +98,12 @@ class AuxiliarController1 extends Controller
       ->join('docente_materia as docmat', 'grulab.ID_DOC_MAT', '=', 'docmat.ID_DOCENTE_MATERIA')
       ->join('materia as mat', 'docmat.ID_MATERIA', '=', 'mat.ID_MATERIA')
       ->join('docente as doc', 'docmat.ID_DOCENTE', '=', 'doc.ID_DOCENTE')
-      ->join('hora_clase as hrcl', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hrcl.ID_HORA')
+      //->join('hora_clase as hrcl', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hrcl.ID_HORA')
       ->join('auxiliar as aux', 'grulab.ID_AUX', '=', 'aux.ID_AUXILIAR')
       //->where('cp.ID_INSCRIPCION','=', ''.$id);
       //->where('aux.ID_AUXILIAR','=',"".$ida."");
       //->where('est.ID_ESTUDIANTE','=',"".$id."")
-      ->where('aux.ID_AUXILIAR','=','10001')
+      //->where('aux.ID_AUXILIAR','=','10001')
       ->where('pgru.ID_PRAC_GRUPO','=',"".$id."")
       ;
       $estudiantes = $estudiantes->get();
