@@ -11,6 +11,7 @@ use App\Http\Requests\PortafolioFormRequest;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
+use Carbon\Carbon;
 use DB;
 class SesionMateriaController extends Controller
 {
@@ -105,10 +106,25 @@ class SesionMateriaController extends Controller
         if(Input::hasFile('archivo')){
             $file = Input::file('archivo');
             $ruta_prueba = public_path()."/archivosTIS/$id/";
-            File::makeDirectory($ruta_prueba,0777,true);
+            File::makeDirectory($ruta_prueba,0777,true,true);
             $file->move($ruta_prueba, $file->getClientOriginalName());
 
             $port->RUTA_ARCHIVO = $file->getClientOriginalName();
+        }
+        $fecha = Carbon::now();
+        $fecha = $fecha->format('Y-m-d');
+        $idGestion = DB::table('gestion');
+        $idGestion = $idGestion->get();
+        foreach($idGestion as $gestion){
+            $ini = $gestion->INICIO_GESTION;
+            $fin = $gestion->FIN_GESTION;
+            $idGestion1 = DB::table('gestion')
+            ->where('INICIO_GESTION','<=',$fecha)
+            ->where('FIN_GESTION','>=',$fecha);
+            $idGestion1 = $idGestion1->get()->first();
+            if($idGestion1 != null){
+                $port->ID_GESTION = $idGestion1->ID_GESTION;
+            }
         }
         $port->save();
         return Redirect::back();

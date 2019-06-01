@@ -80,7 +80,13 @@ class HorarioController extends Controller
             //->where('DISPONIBLE','=','1')
             ->orderBy('hdl.ID_HORA_DIA_LABORATORIO','asc')
             ->paginate(10);
-        return view("administrador.horario.laboratorios.labs",["horario"=>$horario]);
+
+            $laboratorio=DB::table('laboratorio as lab')
+            ->select('lab.ID_LABORATORIO','NOMBRE_LABORATORIO','ESTADO')
+
+            ->where('ESTADO','=','1')->orderBy('ID_LABORATORIO','asc');
+            $laboratorio=$laboratorio->get();    
+        return view("administrador.horario.laboratorios.labs",["horario"=>$horario,"laboratorio"=>$laboratorio]);
     
     }
 
