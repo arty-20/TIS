@@ -16,16 +16,24 @@ Route::get('/', function () {
 });
 //Antony
 Route::resource('/administrador/docente', 'Administrador\DocenteController');
+Route::get('/administrador/docente/{id}/destroy', 'Administrador\DocenteController@destroy');
+
 Route::resource('/administrador/materia', 'Administrador\MateriaController');
+Route::get('/administrador/materia/{id}/destroy', 'Administrador\MateriaController@destroy');
+
 Route::resource('/administrador/auxiliar', 'Administrador\AuxiliarController');
+Route::get('/administrador/auxiliar/{id}/destroy', 'Administrador\AuxiliarController@destroy');
+
 Route::resource('/administrador/estudiante','Administrador\EstudianteController');
 
 Route::resource('/administrador/gestion', 'Administrador\GestionController');
 Route::get('/administrador/gestion/lista/{id}','Administrador\GestionController@listGestion');
+Route::get('/administrador/gestion/{id}/destroy', 'Administrador\GestionController@destroy');
 
 Route::get('/administrador/horario/laboratorios/labs/{id}','Administrador\HorarioController@listar');
 Route::get('/administrador/horario/{id}','Administrador\HorarioController@ocupado');
 Route::resource('/administrador/horario','Administrador\HorarioController');
+
 
 //Arturo
 Route::resource('estudiante/registro', 'estudiante\EstudianteController');
