@@ -11,10 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('auth/login');
+Route::group(['middleware' => 'guest'], function(){
+	Route::get('/', function () {
+    	return view('auth/login');
+	});
+	Route::resource('estudiante/registro', 'estudiante\EstudianteController');
 });
-Route::resource('estudiante/registro', 'estudiante\EstudianteController');
+
 //Antony
 Route::group(['middleware' => ['auth','admin']], function(){
 	Route::resource('/administrador/docente', 'Administrador\DocenteController');
