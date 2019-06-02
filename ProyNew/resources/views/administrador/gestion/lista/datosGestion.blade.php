@@ -1,5 +1,5 @@
 @extends ('layouts.admin')
-@section ('contenido')
+@section ('contenidoadmin')
 
 <div>
 	<h3>Grupos de Laboratorio</h3>

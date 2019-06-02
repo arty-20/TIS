@@ -2,7 +2,33 @@
 @extends('administrador.horario.index')
 @section('labos')
 
-	{{$horario->render()}}
+<!-- <div class="table-responsive">
+	<table class="table table-striped table-bordered table-condensed table-hover">
+	<thead>
+		<th>Día</th>
+		@foreach ($hora as $ho)
+		<th>{{$ho->HORA_INICIO.'-'.$ho->HORA_FIN}}</th>
+		@endforeach		
+	</thead>
+	@foreach ($dia as $d)
+	<tr>
+		<td>{{$d->NOMBRE_DIA}}</td>
+		@foreach ($horario as $hor)
+		<td>
+		<a href="{{URL::action('Administrador\HorarioController@ocupado',$hor->ID_HORA_DIA_LABORATORIO)}}">
+				@if(($hor->DISPONIBLE)==1)
+                <button class="btn btn-primary">Ocupar</button>
+                @elseif(($hor->DISPONIBLE)==0)
+                <button class="btn btn-success">Desocupar</button>
+                @endif
+			</a>
+		</td>
+		@endforeach
+	</tr>
+	@endforeach
+	</table>
+</div> -->
+
 <div class="table-responsive">
 	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
@@ -24,6 +50,8 @@
 		</tr>
 		@endforeach
 	</table>
+	{{$horario->render()}}
 </div>
-</div>
+</div> 
+
 @endsection

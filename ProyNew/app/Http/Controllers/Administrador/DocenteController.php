@@ -55,7 +55,6 @@ class DocenteController extends Controller
     public function update(DocenteFormRequest $request,$id)
     {
         $docente=Docente::findOrFail($id);
-        $docente->CONTRASENIA=$request->get('CONTRASENIA');
         $docente->EMAIL=$request->get('EMAIL');
         $docente->NOMBRE_DOCENTE=$request->get('NOMBRE_DOCENTE');
         $docente->APELLIDO_DOCENTE=$request->get('APELLIDO_DOCENTE');

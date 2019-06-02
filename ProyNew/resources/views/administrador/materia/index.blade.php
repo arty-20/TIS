@@ -1,5 +1,5 @@
 @extends ('layouts.admin')
-@section ('contenido')
+@section ('contenidoadmin')
 <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" style="float:left;">
         <a style="float:right; text-decoration:none;" href="/administrador/materia/create"><button style="border:0px; padding:0px;" width="50px"><img  src="{{ asset('/img/masblancofondonegro.jpg') }}" alt="Nuevo" width="75"></button></a>        

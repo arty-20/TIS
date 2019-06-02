@@ -1,5 +1,5 @@
 @extends ('layouts.admin')
-@section ('contenido')
+@section ('contenidoadmin')
 <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" style="float:left;">
         <h3 >Listado de estudiantes</h3>

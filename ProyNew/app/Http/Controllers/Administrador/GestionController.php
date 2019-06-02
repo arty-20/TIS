@@ -122,7 +122,7 @@ class GestionController extends Controller
                 'h.HORA_FIN','doc.NOMBRE_DOCENTE','doc.APELLIDO_DOCENTE','aux.NOMBRE_AUXILIAR',
                 'aux.APELLIDO_AUXILIAR','mat.NOMBRE_MATERIA','dm.ID_DOCENTE_MATERIA','hdl.ID_HORA_DIA_LABORATORIO')
         ->where('g.ID_GESTION','=',$id)
-        ->paginate(1);
+        ->paginate(10);
         return view('administrador.gestion.lista.datosGestion',["lista"=>$lista]);
     }
 

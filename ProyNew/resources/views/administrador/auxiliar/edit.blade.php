@@ -1,5 +1,5 @@
 @extends ('layouts.admin')
-@section ('contenido')
+@section ('contenidoadmin')
  
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -19,20 +19,20 @@
         {{Form::token()}}
         
         <div class="form-group">
-            <label for="contrasenia">Contraseña</label>
-            <input type="text" class="form-control" name="CONTRASENIA" value="{{$auxiliar->CONTRASENIA}}">
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">Email(*)</label>
             <input type="text" class="form-control" name="EMAIL" value="{{$auxiliar->EMAIL}}">
         </div>
         <div class="form-group">
-            <label for="nombre">Nombres</label>
+            <label for="nombre">Nombres(*)</label>
             <input type="text" class="form-control" name="NOMBRE_AUXILIAR" value="{{$auxiliar->NOMBRE_AUXILIAR}}">
         </div>
         <div class="form-group">
-            <label for="apellido">Apellidos</label>
+            <label for="apellido">Apellidos(*)</label>
             <input type="text" class="form-control" name="APELLIDO_AUXILIAR" value="{{$auxiliar->APELLIDO_AUXILIAR}}">
+        </div>
+        
+        <div class="form-group">
+            <p style="color:red;">Campos obligatorios(*)</p>
         </div>
         <div class="form-group">
             <button class="btn btn-success" type="submit">Guardar</button>
