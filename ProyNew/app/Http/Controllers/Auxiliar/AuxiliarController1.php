@@ -100,6 +100,7 @@ class AuxiliarController1 extends Controller
       ->join('docente as doc', 'docmat.ID_DOCENTE', '=', 'doc.ID_DOCENTE')
       //->join('hora_clase as hrcl', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hrcl.ID_HORA')
       ->join('auxiliar as aux', 'grulab.ID_AUX', '=', 'aux.ID_AUXILIAR')
+
       //->where('cp.ID_INSCRIPCION','=', ''.$id);
       //->where('aux.ID_AUXILIAR','=',"".$ida."");
       //->where('est.ID_ESTUDIANTE','=',"".$id."")
@@ -107,6 +108,15 @@ class AuxiliarController1 extends Controller
       ->where('pgru.ID_PRAC_GRUPO','=',"".$id."")
       ;
       $estudiantes = $estudiantes->get();
+
+// <<<<<<< HEAD
+//
+// =======
+//       ->where('aux.ID_AUXILIAR','=','10001')
+//       ->where('est.ID_ESTUDIANTE','=',"".$id."");
+//       $estudiantes = $estudiantes->get();
+// >>>>>>> origin/pablo
+// >>>>>>> origin/local
 
       return view("auxiliar.edit",["estudiante"=>$estudiantes]);
     }
@@ -124,7 +134,7 @@ class AuxiliarController1 extends Controller
     }
     public function descargar($id, $archivo){
         $public_path = public_path();
-        $url = $public_path."/archivosTIS/1/".$archivo;
+        $url = $public_path."/archivosTIS/$id/".$archivo;
         return response()->download($url);
     }
 }

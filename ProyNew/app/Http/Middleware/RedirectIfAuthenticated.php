@@ -15,10 +15,21 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+   public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            if (Auth::user()->role == 1) {
+                return redirect('administrador/horario');
+            }
+            if (Auth::user()->role == 2) {
+                return redirect('docente');
+            } 
+            if (Auth::user()->role == 3) {
+                return redirect('auxiliar');
+            } 
+            if (Auth::user()->role == 4) {
+                return redirect('estudiante/inscripcion');
+            } 
         }
 
         return $next($request);

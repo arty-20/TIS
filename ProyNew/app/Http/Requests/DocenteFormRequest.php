@@ -25,8 +25,8 @@ class DocenteFormRequest extends FormRequest
     public function rules()
     {
         return [
-        'CONTRASENIA'=>'required_with:CONTRASENIA_CONFIRMATION|same:CONTRASENIA_CONFIRMATION|string|max:20',
-            'CONTRASENIA_CONFIRMATION'=>'max:20|string',
+        'CONTRASENIA'=>'required_with:CONTRASENIA_CONFIRMATION|same:CONTRASENIA_CONFIRMATION|string|max:191',
+            'CONTRASENIA_CONFIRMATION'=>'max:191|string',
             'EMAIL'=>'required|string|email|max:50|unique:docente',
             'NOMBRE_DOCENTE'=>'required|string|max:30',
             'APELLIDO_DOCENTE'=>'required|string|max:30',

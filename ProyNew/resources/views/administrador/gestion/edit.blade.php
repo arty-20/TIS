@@ -22,6 +22,14 @@
             <input type="text" name="NOMBRE_GESTION" value="{{$gestion->NOMBRE_GESTION}}">
         </div>
         <div>
+            <label for="inicio_gestion">Inicio de gestión</label>
+            <input type="date" name="INICIO_GESTION" value="{{$gestion->INICIO_GESTION}}">
+        </div>
+        <div>
+            <label for="fin_gestion">Fin de gestión</label>
+            <input type="date" name="FIN_GESTION" value="{{$gestion->FIN_GESTION}}">
+        </div>
+        <div>
             <button type="submit">Guardar</button>
             <button type="reset">Cancelar</button>
         </div>

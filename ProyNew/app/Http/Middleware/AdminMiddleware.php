@@ -21,7 +21,7 @@ class AdminMiddleware
         } 
 
         if (Auth::user()->role == 2) {
-            return redirect('docente/index');
+            return redirect('docente');
         } 
         if (Auth::user()->role == 3) {
             return redirect('auxiliar');

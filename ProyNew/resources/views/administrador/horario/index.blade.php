@@ -1,6 +1,6 @@
 @extends ('layouts.admin')
 @section ('contenido')
-    
+        
     <div>
         <div>
             <h3>Control de Horarios de Laboratorio</h3>
@@ -14,8 +14,9 @@
         </nav>
     </div>
 
-    
-    
+    <div>
+    @yield('labos')
+    </div>
  
         
      
