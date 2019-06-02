@@ -7,9 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Modelos\Auxiliar;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Http\Requests\AuxiliarFormRequest;
 use DB;
-
+use Mail;
 
 class AuxiliarController extends Controller
 {
@@ -21,11 +22,18 @@ class AuxiliarController extends Controller
         {
             $query=trim($request->get('searchText'));
             $auxiliares=DB::table('auxiliar')->where('NOMBRE_AUXILIAR','LIKE','%'.$query.'%')
-            ->where ('ESTADO', '=', '1') 
+            ->where ('ESTADO', '=', '1')
             ->orderBy('ID_AUXILIAR','desc')
             ->paginate(3);
             return view('administrador.auxiliar.index',["auxiliares"=>$auxiliares,"searchText"=>$query]);
         }
+    }
+
+    public function setDeleted($id){
+        $auxiliar=Auxiliar::findOrFail($id);
+        $auxiliar->ESTADO='0';
+        $auxiliar->update();
+        return view('administrador.auxiliar.index');
     }
 
     public function create()
@@ -36,9 +44,9 @@ class AuxiliarController extends Controller
     {
         $auxiliar=new Auxiliar;
         $auxiliar->CONTRASENIA=bcrypt($request->get('CONTRASENIA'));
-        $auxiliar->EMAIL=$request->get('EMAIL');
-        $auxiliar->NOMBRE_AUXILIAR=$request->get('NOMBRE_AUXILIAR');
-        $auxiliar->APELLIDO_AUXILIAR=$request->get('APELLIDO_AUXILIAR');
+        $data['email']=$auxiliar->EMAIL=$request->get('EMAIL');
+        $data['nombre']=$auxiliar->NOMBRE_AUXILIAR=$request->get('NOMBRE_AUXILIAR');
+        $data['apellido']=$auxiliar->APELLIDO_AUXILIAR=$request->get('APELLIDO_AUXILIAR');
         $auxiliar->CODIGO_SIS=$request->get('CODIGO_SIS');
         $auxiliar->ESTADO='1';
         $auxiliar->save();

@@ -31,7 +31,13 @@ Route::group(['middleware' => ['auth','admin']], function(){
 	Route::get('/administrador/horario/laboratorios/labs/{id}','Administrador\HorarioController@listar');
 	Route::get('/administrador/horario/{id}','Administrador\HorarioController@ocupado');
 	Route::resource('/administrador/horario','Administrador\HorarioController');
+
+	Route::get('/administrador/docente/{id}/destroy', 'Administrador\DocenteController@destroy');
+	Route::get('/administrador/materia/{id}/destroy', 'Administrador\MateriaController@destroy');
+	Route::get('/administrador/auxiliar/{id}/destroy', 'Administrador\AuxiliarController@destroy');
+	Route::get('/administrador/gestion/{id}/destroy', 'Administrador\GestionController@destroy');
 });
+
 
 
 //Arturo
@@ -65,7 +71,7 @@ Route::group(['middleware' => ['auth','docente']], function(){
 
 	Route::get('docente/grupoLaboratorio/{id}/{archivo}', 'docente\PracticaGrupoController@descargar');
 	Route::get('docente/grupoLaboratorio/{id}','docente\PracticaGrupoController@mostrarGrupo');
-	Route::resource('docente/grupoLaboratorio','docente\PracticaGrupoController');	
+	Route::resource('docente/grupoLaboratorio','docente\PracticaGrupoController');
 });
 
 

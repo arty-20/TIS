@@ -5,6 +5,7 @@
 	<h3>Grupos de Laboratorio</h3>
 </div>
 <div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	<div class="table_responsive">
 		<table class="table table-striped table-bordered table-condensed table-hover">
 			<thead>
@@ -25,7 +26,10 @@
 			@endforeach			
 		</table>
 	</div>
+	{{$lista->render()}}
+	</div>
 </div>
-<a href="../../gestion">Volver</a>
-
+<div>
+<h4><a href="../../gestion">Volver</a></h4>
+</div>
 @endsection

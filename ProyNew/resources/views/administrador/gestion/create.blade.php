@@ -1,38 +1,38 @@
 @extends ('layouts.admin')
 @section ('contenido')
- 
-<div>
-    <div>
-        <h3>Formulario para creación de nueva gestión</h3>
+
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <h3>Formulario para creación de gestiones</h3>
         @if(count($errors)>0)
-        <div>
+        <div class="alert alert-danger">
             <ul>
             @foreach ($errors->all() as $error)
                 <li>{{$error}}</li>
-            @endforeach                
+            @endforeach
             </ul>
         </div>
         @endif
 
         {!!Form::open(array('url'=>'administrador/gestion','method'=>'POST','autocomplete'=>'off'))!!}
         {{Form::token()}}
-        
 
-        <div>
+
+        <div class="form-group">
             <label for="nombre">Nombre de la gestión</label>
-            <input type="text" name="NOMBRE_GESTION" placeholder="Ingrese el nombre de la gestión">
+            <input type="text" class="form-control" name="NOMBRE_GESTION" placeholder="Ingrese el nombre de la gestión">
         </div>
-        <div>
+        <div class="form-group">
             <label for="inicio_gestion">Inicio de gestión</label>
-            <input type="date" name="INICIO_GESTION">
+            <input type="date" class="form-control" name="INICIO_GESTION">
         </div>
-        <div>
+        <div class="form-group">
             <label for="fin_gestion">Fin de gestión</label>
-            <input type="date" name="FIN_GESTION">
+            <input type="date" class="form-control" name="FIN_GESTION">
         </div>
-        <div>
-            <button type="submit">Guardar</button>
-            <button type="reset">Cancelar</button>
+        <div class="formgroup">
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
         </div>
         {!!Form::close()!!}
     </div>

@@ -1,11 +1,11 @@
 @extends ('layouts.admin')
 @section ('contenido')
  
-<div>
-    <div>
-        <h3>Formulario para creación de nueva materia</h3>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <h3>Formulario para creación materias</h3>
         @if(count($errors)>0)
-        <div>
+        <div class="alert alert-danger">
             <ul>
             @foreach ($errors->all() as $error)
                 <li>{{$error}}</li>
@@ -18,13 +18,13 @@
         {{Form::token()}}
         
 
-        <div>
+        <div class="form-group">
             <label for="nombre">Nombre de la materia</label>
-            <input type="text" name="NOMBRE_MATERIA" placeholder="Ingrese el nombre de la materia">
+            <input type="text" class="form-control" name="NOMBRE_MATERIA" placeholder="Ingrese el nombre de la materia">
         </div>
-        <div>
-            <button type="submit">Guardar</button>
-            <button type="reset">Cancelar</button>
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
         </div>
         {!!Form::close()!!}
     </div>
