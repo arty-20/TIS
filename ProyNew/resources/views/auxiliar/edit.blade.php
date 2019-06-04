@@ -3,15 +3,25 @@
 <div class="row">
 	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
 		<h3>Comentario de Auxiliar en Portafolio de Session de
-			{{ $estudiante[0]->NOMBRE_ESTUDIANTE }} {{ $estudiante[0]->APELLIDO_ESTUDIANTE }}
-		{{$estudiante[0]->ID_PRAC_GRUPO}}</h3>
+			{{ $estudiante[0]->NOMBRE_ESTUDIANTE }} {{ $estudiante[0]->APELLIDO_ESTUDIANTE }}</h3>
 	</div>
 </div>
 
 {!!Form::model($estudiante,['method'=>'PATCH','route'=>['auxiliar.update',$estudiante[0]->ID_PORTAFOLIO]])!!}
 <div class="form-group">
-  <textarea class="form-control" name="comentario" rows="5" value="">{{ $estudiante[0]->COMENTARIO_AUXILIAR }}</textarea>
+  <textarea class="form-control" name="comentario" rows="5">{{ $estudiante[0]->COMENTARIO_AUXILIAR }}</textarea>
   <br>
+	<!--  -->
+	<div class="row">
+		<div class="col-md-2">
+			Nota Opcional:
+	  </div>
+		<div class="col-md-2">
+			<input type="number" name="nota" min="1" max="100" value="{{ $estudiante[0]->NOTA_DOCENTE }}">
+		</div>
+	</div>
+	<br>
+	<!--  -->
   <div class="form-group row">
     <div class="col-md-2">
       <button type="submit" class="btn btn-success btn-block">Guardar</button>

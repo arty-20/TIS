@@ -45,39 +45,33 @@ class AuxiliarController1 extends Controller
             //->join('hora_dia_laboratorio as hd', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hd.ID_HORA_DIA_LABORATORIO')
             //->join('hora_clase as hrcl', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hrcl.ID_HORA')
             ->join('auxiliar as aux', 'grulab.ID_AUX', '=', 'aux.ID_AUXILIAR')
+            ->join('portafolio as port', 'port.ID_PORTAFOLIO', '=', 'cp.ID_PORTAFOLIO')
+            //->join('portafolio as port', 'pgru.ID_PRAC_GRUPO', '=', 'port.ID_PORTAFOLIO')
             ->where('aux.ID_AUXILIAR','=',"".$id."");
             //->where('aux.ID_AUXILIAR','=','10002');
             //->where('aux.NOMBRE_AUXILIAR','=','Arturo');
             $estudiantes = $estudiantes->get();
 
-            $ports=DB::table('portafolio as p');
-            $ports = $ports->get();
+            $portafolio = DB::table('portafolio');
+            //->where('ID_INSCRIPCION','=',"$idIns")
+            //->where('ID_PRAC_GRUPO','=',"$idPrac")
+            //->select('ID_PORTAFOLIO');
+            $portafolio = $portafolio->get();
 
-            return view('auxiliar.index',["port"=>$ports,"estudiantes"=>$estudiantes,"searchText"=>$query]);
+            return view('auxiliar.index',["portafolio"=>$portafolio,
+                                          "estudiantes"=>$estudiantes,
+                                          "searchText"=>$query]);
         }
     }
     public function create()
     {
-      // $estudiantes=DB::table('comentario_portafolio as cp')
-      // ->join('inscripcion as ins', 'cp.ID_INSCRIPCION', '=', 'ins.ID_INSCRIPCION')
-      // ->join('practica_grupo as pgru', 'cp.ID_PRAC_GRUPO', '=', 'pgru.ID_PRAC_GRUPO')
-      // ->join('estudiante as est', 'ins.ID_ESTUDIANTE', '=', 'est.ID_ESTUDIANTE')
-      // ->join('grupo_laboratorio as grulab', 'ins.ID_GRUPOLAB', '=', 'grulab.ID_GRUPOLAB')
-      // ->join('docente_materia as docmat', 'grulab.ID_DOC_MAT', '=', 'docmat.ID_DOCENTE_MATERIA')
-      // ->join('materia as mat', 'docmat.ID_MATERIA', '=', 'mat.ID_MATERIA')
-      // ->join('docente as doc', 'docmat.ID_DOCENTE', '=', 'doc.ID_DOCENTE')
-      // ->join('hora_clase as hrcl', 'grulab.ID_HORARIO_LABORATORIO', '=', 'hrcl.ID_HORA')
-      // ->join('auxiliar as aux', 'grulab.ID_AUX', '=', 'aux.ID_AUXILIAR')
-      // ->where('aux.ID_AUXILIAR','=','10001');
-      // // ->where('est.ID_ESTUDIANTE','=',"".$id."");
-      // $estudiantes = $estudiantes->get();
-      //
-      // return view("auxiliar.coment",["estudiante"=>$estudiantes]);
+
     }
     public function store (StoreRequest $request)
     {
       $port = new ComentarioPortafolio();
-      $port->COMENTARIO_AUXILIAR   = $request->get('comentario');
+      //$port->COMENTARIO_AUXILIAR  = $request->get('comentario');
+      $port->NOTA_DOCENTE         = $request->get('nota');
       //$port->RUTA_ARCHIVO = $file->getClientOriginalName();
 
       $port->save();
@@ -109,21 +103,13 @@ class AuxiliarController1 extends Controller
       ;
       $estudiantes = $estudiantes->get();
 
-// <<<<<<< HEAD
-//
-// =======
-//       ->where('aux.ID_AUXILIAR','=','10001')
-//       ->where('est.ID_ESTUDIANTE','=',"".$id."");
-//       $estudiantes = $estudiantes->get();
-// >>>>>>> origin/pablo
-// >>>>>>> origin/local
-
       return view("auxiliar.edit",["estudiante"=>$estudiantes]);
     }
     public function update(ComentarioFormRequest $request,$id)
     {
       $port = ComentarioPortafolio::findOrFail($id);
       $port->COMENTARIO_AUXILIAR   = $request->get('comentario');
+      $port->NOTA_DOCENTE         = $request->get('nota');
 
       $port->update();
       return Redirect::to('auxiliar');
@@ -136,5 +122,16 @@ class AuxiliarController1 extends Controller
         $public_path = public_path();
         $url = $public_path."/archivosTIS/$id/".$archivo;
         return response()->download($url);
+    }
+    public function listarGrupos($idGrupo, $idEstudiante){
+        $sesiones=DB::table('inscripcion as ins')
+        ->join('practica_grupo as pg','pg.ID_GRUPOLAB','=','ins.ID_GRUPOLAB')
+        ->join('grupo_laboratorio as gl','gl.ID_GRUPOLAB','=','ins.ID_GRUPOLAB')
+        ->where('ESTADO_GC','=','1')
+        ->where('pg.ID_GRUPOLAB','=',$idGrupo)
+        ->where('ID_ESTUDIANTE','=', $idEstudiante);
+        $sesiones = $sesiones->get();
+        return view('estudiante.inscripcion.sesionMateria.principal',["sesiones"=>$sesiones]);
+
     }
 }

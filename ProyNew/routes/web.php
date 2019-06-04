@@ -77,8 +77,10 @@ Route::group(['middleware' => ['auth','docente']], function(){
 
 //Pablo
 Route::group(['middleware' => ['auth','auxiliar']], function(){
+	Route::resource('auxiliar/recursos','Auxiliar\AuxiliarController2');
+	Route::resource('auxiliar/reportes','Auxiliar\AuxiliarControllerReporte');
   Route::resource('auxiliar','Auxiliar\AuxiliarController1');
-  Route::resource('auxiliar/grupo2','Auxiliar\AuxiliarController2');
+  //Route::resource('/recursos','Auxiliar\AuxiliarController2');
   Route::get('auxiliar/descargar/{id}/{archivo}', 'Auxiliar\AuxiliarController1@descargar');
 });
 

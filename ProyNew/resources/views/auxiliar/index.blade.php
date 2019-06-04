@@ -15,27 +15,40 @@
 					<th>N*</th>
 					<th>Nombre</th>
 					<th>Apellido</th>
+					<!-- <th>Documento1</th> -->
 					<th>Documento</th>
-					<th>URL</th>
 					<th>Comentario</th>
 					<th>Estado Entrega</th>
+					<th>Nota</th>
 					<th>Otros</th>
 				</thead>
                @foreach ($estudiantes as $est)
 				<tr>
-					<td>{{ $est->ID_PORTAFOLIO }}</td>
+					<td>{{ $est->ID_ESTUDIANTE }}</td>
 					<td>{{ $est->NOMBRE_ESTUDIANTE }}</td>
 					<td>{{ $est->APELLIDO_ESTUDIANTE }}</td>
-					<td>{{ $est->PRACTICA }}</td>
+					<!-- <td>{{ $est->PRACTICA }}</td> -->
 					<td><a href="{{URL::action('Auxiliar\AuxiliarController1@descargar',
-	                  array('id'=>$est->ID_PORTAFOLIO,'archivo'=>$est->PRACTICA))}}"
-	                  class="list-group-item list-group-item-action">{{$est->PRACTICA}}</a></td>
+	                  array('id'=>$est->ID_PORTAFOLIO,'archivo'=>$est->RUTA_ARCHIVO))}}"
+	                  class="list-group-item list-group-item-action">{{$est->RUTA_ARCHIVO}}</a></td>
 					<td>{{ $est->COMENTARIO_AUXILIAR }}</td>
 					<td>
 						@if ($est->PRACTICA !== '')
 							Entregado
 						@else
 							No Entregado
+						@endif
+					</td>
+					<td>
+						@if ($est->NOTA_DOCENTE === 0)
+							No Asignado
+						@else
+							<!-- <span class="badge bg-red">{{$est->NOTA_DOCENTE}}</span> -->
+							@if ($est->NOTA_DOCENTE <= 50)
+								<span class="badge bg-red">{{$est->NOTA_DOCENTE}}</span>
+							@else
+								<span class="badge bg-green">{{$est->NOTA_DOCENTE}}</span>
+							@endif
 						@endif
 					</td>
 					<td>
