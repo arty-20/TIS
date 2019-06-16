@@ -1,5 +1,5 @@
-@extends ('layouts.admin')
-@section ('contenido')
+﻿@extends ('layouts.administrador')
+@section ('contenidoadmin')
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" style="float:left;">
         <a style="float:right; text-decoration:none;" href="/administrador/docente/create"><button style="border:0px; padding:0px;" width="50px"><img  src="{{ asset('/img/masblancofondonegro.jpg') }}" alt="Nuevo" width="75"></button></a>        
@@ -25,14 +25,14 @@
                     <td>{{ $doc->APELLIDO_DOCENTE}}</td>
                     <td>{{ $doc->EMAIL}}</td>
                     <td>{{ $doc->TELEFONO}}</td>
-                    <td><a href="{{URL::action('Administrador\DocenteController@edit', $doc->ID_DOCENTE)}}"><button class="btn btn-info">Editar</button></a>
+                    <td><!--<a href="{{URL::action('Administrador\DocenteController@edit', $doc->ID_DOCENTE)}}"><button class="btn btn-info">Editar</button></a>-->
                     <a href="{{URL::action('Administrador\DocenteController@destroy', $doc->ID_DOCENTE)}}"><button class="btn btn-danger">Eliminar</button></a></td>
                 </tr>
                 @include('administrador.docente.modal')
                 @endforeach
             </table>
         </div>
-        {{$docentes->render()}}
+        {!! $docentes->links('administrador.pagination') !!}
         </div>
     </div>
 @endsection

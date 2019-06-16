@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -46,12 +46,12 @@
           <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('login') }}">Login <i class="fa fa-fw fa-sign-in"></i> </a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a >
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }} <i class="fa fa-fw fa-user"></i> <span class="caret"></span>
                                 </a>
 
 
@@ -59,8 +59,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                                           <b> Logout<i class="fa fa-fw fa-sign-out"></i></b>                                       </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
@@ -90,8 +89,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{asset('auxiliar')}}"><i class="fa fa-circle-o"></i>Grupo #1</a></li>
-                <li><a href="{{asset('auxiliar')}}"><i class="fa fa-circle-o"></i>Grupo #2</a></li>
+                <li><a href="{{asset('auxiliar')}}"><i class="fa fa-circle-o"></i>Mis Grupos</a></li>
               </ul>
             </li>
             <!-- Recursos -->

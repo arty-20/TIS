@@ -27,7 +27,7 @@ class DocenteFormRequest extends FormRequest
         return [
         'CONTRASENIA'=>'required_with:CONTRASENIA_CONFIRMATION|same:CONTRASENIA_CONFIRMATION|string|max:191',
             'CONTRASENIA_CONFIRMATION'=>'max:191|string',
-            'EMAIL'=>'required|string|email|max:50|unique:docente',
+            'EMAIL'=>'required|string|email|max:50|unique:users',
             'NOMBRE_DOCENTE'=>'required|string|max:30',
             'APELLIDO_DOCENTE'=>'required|string|max:30',
             'TELEFONO'=>'numeric',

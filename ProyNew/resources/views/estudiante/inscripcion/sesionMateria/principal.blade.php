@@ -29,17 +29,39 @@
 
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
-        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Navegación</span>
           </a>
-          
-
+            <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+              @if (Auth::guest())
+                  <li><a href="{{ route('login') }}">Login</a></li>
+                  <li><a href="{{ route('register') }}">Register</a></li>
+              @else
+                  <li class="dropdown">
+                      <a>
+                          {{ Auth::user()->name }} <span class="caret"></span>
+                      </a>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                  </li>
+              @endif
+            </ul>
         </nav>
       </header>
       <aside class="main-sidebar">
         <section class="sidebar">
           <ul class="sidebar-menu">
             <li class="header"></li>
+            <?php $i = 1; ?>
             @foreach ($sesiones as $se)
             @if($se->ESTADO_GC == 1)
             <li class="treeview">
@@ -54,7 +76,8 @@
                   'idGrupo'     =>$se->ID_GRUPOLAB , 
                   'idEstudiante'=>$se->ID_ESTUDIANTE,
                   'idInc'       =>$se->ID_INSCRIPCION,
-                  'idPracGrupo' =>$se->ID_PRAC_GRUPO))}}">
+                  'idPracGrupo' =>$se->ID_PRAC_GRUPO,
+		               'i'=>$i))}}">
                 <i class="fa fa-circle-o"></i>Practica Auxiliar</a></li>
 
                 <li><a href="{{URL::action('estudiante\SesionMateriaController@buscarPortafolio',
@@ -67,6 +90,7 @@
                 </li>
             </ul>
             </li>
+            <?php $i++; ?>
             @endif
             @endforeach
           </ul>

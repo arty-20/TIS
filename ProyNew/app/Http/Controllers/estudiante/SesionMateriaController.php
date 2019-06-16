@@ -19,24 +19,22 @@ class SesionMateriaController extends Controller
     }
 
     public function listarSesiones($idGrupo, $idEstudiante){
-        $sesiones=DB::table('inscripcion as ins')
-        ->join('practica_grupo as pg','pg.ID_GRUPOLAB','=','ins.ID_GRUPOLAB')
-        ->join('grupo_laboratorio as gl','gl.ID_GRUPOLAB','=','ins.ID_GRUPOLAB')
-        ->where('ESTADO_GC','=','1')
-        ->where('pg.ID_GRUPOLAB','=',$idGrupo)
-        ->where('ID_ESTUDIANTE','=', $idEstudiante);
-        $sesiones = $sesiones->get();
+        $sesiones=self::getSesiones($idGrupo, $idEstudiante);
         return view('estudiante.inscripcion.sesionMateria.principal',["sesiones"=>$sesiones]);
 
     }
-    public function buscarPortafolio($idGrupo, $idEstudiante,$idIns, $idPrac){
+    private function getSesiones($a , $b){
         $sesiones=DB::table('inscripcion as ins')
         ->join('practica_grupo as pg','pg.ID_GRUPOLAB','=','ins.ID_GRUPOLAB')
         ->join('grupo_laboratorio as gl','gl.ID_GRUPOLAB','=','ins.ID_GRUPOLAB')
         ->where('ESTADO_GC','=','1')
-        ->where('pg.ID_GRUPOLAB','=',$idGrupo)
-        ->where('ID_ESTUDIANTE','=', $idEstudiante);
+        ->where('pg.ID_GRUPOLAB','=',$a)
+        ->where('ID_ESTUDIANTE','=', $b);
         $sesiones = $sesiones->get();
+        return $sesiones;
+    }
+    public function buscarPortafolio($idGrupo, $idEstudiante,$idIns, $idPrac){
+        $sesiones=self::getSesiones($idGrupo, $idEstudiante);
         $portafolio = DB::table('comentario_portafolio')
         ->where('ID_INSCRIPCION','=',"$idIns")
         ->where('ID_PRAC_GRUPO','=',"$idPrac")
@@ -70,14 +68,8 @@ class SesionMateriaController extends Controller
             "idpor"=>$portafolio2->ID_PORTAFOLIO,
             "paquete"=>$pm]);
     }
-    public function buscarPractica($idGrupo, $idEstudiante,$idIns, $idPrac){
-        $sesiones=DB::table('inscripcion as ins')
-        ->join('practica_grupo as pg','pg.ID_GRUPOLAB','=','ins.ID_GRUPOLAB')
-        ->join('grupo_laboratorio as gl','gl.ID_GRUPOLAB','=','ins.ID_GRUPOLAB')
-        ->where('ESTADO_GC','=','1')
-        ->where('pg.ID_GRUPOLAB','=',$idGrupo)
-        ->where('ID_ESTUDIANTE','=', $idEstudiante);
-        $sesiones = $sesiones->get();
+    public function buscarPractica($idGrupo, $idEstudiante,$idIns, $idPrac,$i){
+        $sesiones=self::getSesiones($idGrupo, $idEstudiante);
         $sesion=DB::table('inscripcion as ins')
         ->join('practica_grupo as pg','pg.ID_GRUPOLAB','=','ins.ID_GRUPOLAB')
         ->join('grupo_laboratorio as gl','gl.ID_GRUPOLAB','=','ins.ID_GRUPOLAB')
@@ -94,7 +86,10 @@ class SesionMateriaController extends Controller
         return view('estudiante.inscripcion.sesionMateria.practicaAuxiliar',[
             "sesiones"=>$sesiones,
             "portafolio1"=>$portafolio1,
-            "practica"=>$sesion->PRACTICA]);
+            "practica"=>$sesion->PRACTICA,
+            "idDocente"=>self::buscarDocente($idPrac),
+            "idPrac"=>$idGrupo,
+	    "i"=>$i]);
     }
     public function prueba($id){
         return view('estudiante.inscripcion.sesionMateria.prueba',["idpor"=>$id]);
@@ -125,7 +120,7 @@ class SesionMateriaController extends Controller
             if($idGestion1 != null){
                 $port->ID_GESTION = $idGestion1->ID_GESTION;
             }
-        }
+        } 
         $port->save();
         return Redirect::back();
     }
@@ -133,5 +128,31 @@ class SesionMateriaController extends Controller
         $public_path = public_path();
         $url = $public_path."/archivosTIS/$id/".$archivo;
         return response()->download($url);
+    }
+    public function descargarPractica($idPrac, $idDoc, $i, $Practica){
+        $url = public_path()."/archivosDoc/$idDoc/$idPrac/$i/".$Practica;
+        return response()->download($url);
+    }
+    private function buscarDocente($id){
+        $res = DB::table('practica_grupo as pg')
+        ->join('grupo_laboratorio as gl','pg.ID_GRUPOLAB','=','gl.ID_GRUPOLAB')
+        ->join('docente_materia as dm','gl.ID_DOC_MAT','=','dm.ID_DOCENTE_MATERIA')
+        ->join('docente as d','dm.ID_DOCENTE','=','d.ID_DOCENTE')
+        ->where('pg.ID_PRAC_GRUPO','=',"$id")
+        ->select('d.ID_DOCENTE');
+        $res = $res->get()->first();
+        return $res->ID_DOCENTE;
+    }
+    public function listarCalificaciones($idGrup, $idEst){
+        $ins = DB::table('inscripcion as i')
+        ->where('i.ID_ESTUDIANTE','=',"$idEst")
+        ->where('i.ID_GRUPOLAB','=',"$idGrup");
+        $ins = $ins->get()->first();
+        $idIns = $ins->ID_INSCRIPCION;
+        $comentarioPortafolio = DB::table('comentario_portafolio as cp')
+        ->join('practica_grupo as pg','cp.ID_PRAC_GRUPO','=','pg.ID_PRAC_GRUPO')
+        ->where('cp.ID_INSCRIPCION','=',"$idIns");
+        $comentarioPortafolio =$comentarioPortafolio->get();
+        return view('estudiante.inscripcion.calificaciones',["comentario"=>$comentarioPortafolio]);
     }
 }

@@ -9,6 +9,7 @@ use App\Modelos\HoraDiaLaboratorio;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\GrupoLabFormRequest;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Session;
 use DB;
 
@@ -61,20 +62,31 @@ class DocenteController extends Controller
         $grupoLaboratorio->ID_AUX=$request->get('ID_AUXILIAR');
         $grupoLaboratorio->ESTADO_GC='1';
         $grupoLaboratorio->ID_HORARIO_LABORATORIO=$hora;
-        $grupoLaboratorio->CANTIDAD_ESTUDIANTES='30';
-        $grupoLaboratorio->ID_GESTION='301';
+        $grupoLaboratorio->CANTIDAD_ESTUDIANTES=$request->get('CANTIDAD');
+
+        $fecha = Carbon::now();
+        $fecha = $fecha->format('Y-m-d');
+        $idGestion = DB::table('gestion');
+        $idGestion = $idGestion->get();
+        foreach($idGestion as $gestion){
+            $ini = $gestion->INICIO_GESTION;
+            $fin = $gestion->FIN_GESTION;
+            $idGestion1 = DB::table('gestion')
+            ->where('INICIO_GESTION','<=',$fecha)
+            ->where('FIN_GESTION','>=',$fecha);
+            $idGestion1 = $idGestion1->get()->first();
+            if($idGestion1 != null){
+                $grupoLaboratorio->ID_GESTION = $idGestion1->ID_GESTION;
+            }
+        }
 
         $grupoLaboratorio->save();  
         
-
-        
-
-        echo "<script type='text/javascript' >window.location.replace('docente/grupos/' + $idMateria + '/' + $id);</script>";
+        echo "<script type='text/javascript' >window.location.replace('docente/grupos/' + $idMateria);</script>";
     }
     public function agregarMateria($idDocente){
        
             $materias = DB::table('materia as m')
-                   ->join('docente_materia as dm','dm.ID_MATERIA','=','m.ID_MATERIA')
                    ->whereNotIn('m.ID_MATERIA',function($q){
                     $id = Session::get('id');
                        $q->select('m.ID_MATERIA')
@@ -86,7 +98,7 @@ class DocenteController extends Controller
         
    }
    
-   public function listarGrupos($idM, $idD){
+   public function listarGrupos($idM){
 
     $id = Session::get('id');
     
@@ -101,7 +113,7 @@ class DocenteController extends Controller
         ->select('gLab.ID_GRUPOLAB','gLab.ESTADO_GC', 'd.NOMBRE_DIA', 'h.HORA_INICIO', 'h.HORA_FIN')
         ->where('dM.ID_DOCENTE','=',$id)
         ->where('dM.ID_MATERIA','=',$idM)
-        ->orderBy('d.NOMBRE_DIA');
+        ->orderBy('d.ID_DIA');
         $grupos = $grupos->get();
 
         $materia= DB::table('materia as m')
@@ -112,7 +124,7 @@ class DocenteController extends Controller
    }
    public function crearGrupo($idMateria){
     $id = Session::get('id');
-    print_r($id);
+
     $auxiliares = DB::table('auxiliar')->where('ESTADO','=','1')->get();
     
     $materia = DB::table('docente_materia as dm')
@@ -122,6 +134,7 @@ class DocenteController extends Controller
     $materia = $materia->first();
     
     $laboratorios = DB::table('laboratorio')->get();
+
     
     return view('docente.grupoLaboratorio.agregarGrupo',["auxiliares"=>$auxiliares,"materia"=>$materia,"labs"=>$laboratorios]);
     
@@ -153,31 +166,21 @@ class DocenteController extends Controller
        
        return response()->json($p);
     }
+
     public function findAuxiliar(Request $request){
-        $idA=DB::table('auxiliar as a')
-                ->join('grupo_laboratorio as gLab','a.ID_AUXILIAR','=','gLab.ID_AUX')
-                ->join('hora_dia_laboratorio as hdLab','hdLab.ID_HORA_DIA_LABORATORIO','=','gLab.ID_HORARIO_LABORATORIO')
-                ->select('a.ID_AUXILIAR')
-                ->where('hdLab.ID_DIA','=',$request->idDia)
-                ->where('hdLab.ID_HORA','=',"".$request->idHora."")
-                ->where('hdLab.DISPONIBLE','=','1')
-                ->get()
-                ->first();  
-        
-        if(empty($idA)){
-            $ax= DB::table('auxiliar as a')->get();
-        }else{
-            $ax= DB::table('grupo_laboratorio as gLab')
-                     ->join('hora_dia_laboratorio as hdLab','hdLab.ID_HORA_DIA_LABORATORIO','=','gLab.ID_HORARIO_LABORATORIO')
-                     ->join('auxiliar as a','gLab.ID_AUX','=','a.ID_AUXILIAR')
-                     ->select('a.ID_AUXILIAR','a.NOMBRE_AUXILIAR','a.APELLIDO_AUXILIAR')
-                     ->where('a.ID_AUXILIAR','<>',$idA->ID_AUXILIAR)
-                     ->distinct()
-                     ->get();
-        
-        }
-        var_dump($ax);
-        return response()->json($ax);
+    
+        $data =DB::select('SELECT aux.ID_AUXILIAR,aux.NOMBRE_AUXILIAR,aux.APELLIDO_AUXILIAR
+                            FROM auxiliar as aux 
+                            WHERE aux.ID_AUXILIAR NOT IN (SELECT a.ID_AUXILIAR FROM auxiliar as a 
+                                                        JOIN grupo_laboratorio as gLab 
+                                                        JOIN hora_dia_laboratorio as hLab 
+                                                        WHERE a.ID_AUXILIAR=gLab.ID_AUX 
+                                                        AND gLab.ID_HORARIO_LABORATORIO = hLab.ID_HORA_DIA_LABORATORIO 
+                                                        AND hLab.ID_DIA=:idD
+                                                        AND hLab.ID_HORA=:idH)',["idD"=>$request->idDia,"idH"=>$request->idHora]);
+
+       
+        return response()->json($data);
     }
     
 

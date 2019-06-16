@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Modelos\Auxiliar;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Http\Requests\AuxiliarFormRequest;
+//use App\Http\Requests\AuxiliarFormRequest;
 use DB;
 use Mail;
 
@@ -22,8 +22,8 @@ class AuxiliarController extends Controller
         {
             $query=trim($request->get('searchText'));
             $auxiliares=DB::table('auxiliar')->where('NOMBRE_AUXILIAR','LIKE','%'.$query.'%')
-            ->where ('ESTADO', '=', '1')
-            ->orderBy('ID_AUXILIAR','desc')
+            ->where ('ESTADO', '=', '1') 
+            ->orderBy('ID_AUXILIAR','asc')
             ->paginate(3);
             return view('administrador.auxiliar.index',["auxiliares"=>$auxiliares,"searchText"=>$query]);
         }
@@ -40,7 +40,7 @@ class AuxiliarController extends Controller
     {
         return view("administrador.auxiliar.create");
     }
-    public function store (AuxiliarFormRequest $request)
+    public function store (Request $request)
     {
         $auxiliar=new Auxiliar;
         $auxiliar->CONTRASENIA=bcrypt($request->get('CONTRASENIA'));
@@ -60,10 +60,9 @@ class AuxiliarController extends Controller
     {
         return view("administrador.auxiliar.edit",["auxiliar"=>Auxiliar::findOrFail($id)]);
     }
-    public function update(AuxiliarFormRequest $request,$id)
+    public function update(Request $request,$id)
     {
         $auxiliar=Auxiliar::findOrFail($id);
-        $auxiliar->CONTRASENIA=$request->get('CONTRASENIA');
         $auxiliar->EMAIL=$request->get('EMAIL');
         $auxiliar->NOMBRE_AUXILIAR=$request->get('NOMBRE_AUXILIAR');
         $auxiliar->APELLIDO_AUXILIAR=$request->get('APELLIDO_AUXILIAR');

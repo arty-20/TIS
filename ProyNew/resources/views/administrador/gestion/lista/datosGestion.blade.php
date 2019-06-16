@@ -1,5 +1,5 @@
-@extends ('layouts.admin')
-@section ('contenido')
+@extends ('layouts.administrador')
+@section ('contenidoadmin')
 
 <div>
 	<h3>Grupos de Laboratorio</h3>
@@ -17,7 +17,7 @@
 			</thead>
 			@foreach ($lista as $li)
 			<tr>
-				<td>{{$li->ID_GRUPOLAB}}</td>
+				<td>{{$li->NOMBRE_MATERIA.'-'.$li->NOMBRE_DOCENTE}}</td>
 				<td>{{$li->NOMBRE_MATERIA}}</td>
 				<td>{{$li->NOMBRE_DOCENTE.' '.$li->APELLIDO_DOCENTE}}</td>
 				<td>{{$li->NOMBRE_AUXILIAR.' '.$li->APELLIDO_AUXILIAR}}</td>
@@ -26,7 +26,7 @@
 			@endforeach			
 		</table>
 	</div>
-	{{$lista->render()}}
+	{{$lista->links('administrador.pagination')}}
 	</div>
 </div>
 <div>

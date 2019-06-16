@@ -26,9 +26,9 @@ class EstudianteController extends Controller{
         $estudiante->APELLIDO_ESTUDIANTE = $request->get('APELLIDO_ESTUDIANTE');
         $estudiante->CODIGO_SIS = $request->get('CODIGO_SIS');
         $estudiante->EMAIL = $request->get('EMAIL');
-        $estudiante->CONTRASENIA = $request->get('CONTRASENIA');
+        $estudiante->CONTRASENIA = bcrypt($request->get('CONTRASENIA'));
         $estudiante->ESTADO ='1';
         $estudiante->save();
-        return Redirect::to('estudiante.registro');
+        return Redirect::to('/');
     }
 }

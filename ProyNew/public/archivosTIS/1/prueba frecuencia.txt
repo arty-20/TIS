@@ -1,0 +1,172 @@
+protected boolean comprobarMuestra(){
+        boolean valido,valido2,res;
+        generarMuestra();
+        valido=pruebaFrecuencias(muestra);
+        valido2=pruebaCorridaMedia(muestra);
+        if(valido==true && valido2==true){
+            res=true;
+        }else{
+            res=false;
+        }
+        return res;
+    }
+    
+    protected double seleccionarNumMuestra(){
+        double res;
+        double selec= Math.random();
+        int selec2= (int)(selec*100);
+        res=muestra[selec2];
+        return res;
+    }
+    
+    protected int genMod(){
+        int mod=0;
+        int power=(int)(Math.random()*10);
+        mod= (int)Math.pow(10,power);
+        return mod;
+    }
+    
+    protected int genA(){
+        int mod=genMod();
+        int a=0;
+        int comp=1;
+            while(comp!=0){
+                a=(int)(Math.random()*100);
+                comp=(a-1)%4;
+            }
+            
+            return a;
+    }
+    
+    protected int genC(){
+        int c=0;
+        int mod=genMod();
+        int comp=0;
+        while(comp!=21){
+            c=(int)(Math.random()*100);
+            comp=c%200;
+        }
+        return c;
+    }
+    protected void generarMuestra(){
+        int a=genA();
+        int c=genC();
+        int mod=genMod();
+        double x0=(int)(Math.random()*100);
+            for (int i = 0; i < muestra.length; i++) {
+                double xn=(a*x0+c)%mod;
+                muestra[i]=xn/mod;
+                x0=xn;
+            }
+            System.out.println(a+"*"+ x0 +"+"+c+" mod "+mod +"\n ==================");
+            
+        for (int k = 0; k < muestra.length; k++) {
+            System.out.println(k+" "+muestra[k]);
+        }
+     
+    }
+    
+    protected boolean pruebaFrecuencias(double[] muestra){
+        double gradoSignificado= 0.05;
+        int tamanioMuestra= muestra.length;
+        int n=10; //division
+        int intervalos= (int)tamanioMuestra/n;
+        int gradosLibertas= intervalos-1;
+        double rango= 1.0/intervalos;
+        double[] rangos= new double[intervalos];
+        double aux=rango;
+        int[] FO= new int[intervalos];
+        int FE= intervalos;
+        for (int i = 0; i < intervalos; i++) {
+            rangos[i]=aux;
+            aux=aux+rango;
+        }
+        int cont=0;
+        for (int j = 0; j < intervalos; j++) {
+            for (int k = 0; k < tamanioMuestra; k++) {
+                if((muestra[k]<rangos[j]) && (muestra[k]>(rangos[j]-rango))){
+                    cont=cont+1;
+                    FO[j]=cont;
+                }
+            }
+            cont=0;
+        }
+        double x0=0;
+        for (int l = 0; l < FO.length; l++) {
+            int sum=FO[l]-FE;
+            x0=x0+ Math.pow(sum, 2);
+        }
+        double res1=x0/FE;
+        double res2=chiCuadrado(gradosLibertas);
+        boolean res;
+        if(res1<res2){
+            res=true;
+        }else{
+            res=false;
+        }
+        System.out.println(res1+" ---" +res2+ "   resultado="+res + "\n =====================");
+        return res;
+    }
+    
+    protected boolean pruebaCorridaMedia(double[] muestra){
+        double gradoSignificado=0.05;
+        int tamanioMuestra= muestra.length;
+        double media=0.0;
+        double suma=0.0;
+        double contadormas=0.0;
+        boolean swap=false;
+        double contadormenos=0.0;
+        int[] tablaBool= new int[tamanioMuestra];
+        for (int i = 0; i < tamanioMuestra; i++) {
+            suma= suma + muestra[i];
+        }
+        media=suma/tamanioMuestra;
+        for (int j = 0; j < tamanioMuestra; j++) {
+            if(muestra[j]>media){
+                contadormas++;
+                tablaBool[j]=1;
+            }else if(muestra[j]<media){
+                contadormenos++;
+                tablaBool[j]=0;
+            }
+        }
+        int corridas=1;
+        for (int k = 0; k < tamanioMuestra-1; k++) {
+            if(tablaBool[k]!=tablaBool[k+1]){
+                corridas++;
+            }
+        }
+        double num1=(2*contadormas*contadormenos)/(contadormas+contadormenos);
+        double varianza2=(2*contadormas*contadormenos*(2*contadormas*contadormenos-tamanioMuestra))/(Math.pow(tamanioMuestra,2)*(tamanioMuestra-1));
+        double varianza= Math.sqrt(varianza2);
+        double z= (corridas-num1)/varianza;
+        double comp= 1.96;
+        boolean res=false;
+        if(z<comp){
+            res=true;
+        }else if(z>comp){
+            res=false;
+        }
+        System.out.println(z+" --- "+comp + "   resultado="+res +"\n ============= ");
+        System.out.println(num1 + "   " + corridas +"  " +contadormas+ "  "+contadormenos+ "   " + varianza2 + "  media= " + media);
+        return res;
+    }
+    
+    protected double chiCuadrado(int gradoLib){
+        double res;
+        chiCuadrado= new double[10];
+        chiCuadrado[0]=3.8415;
+        chiCuadrado[1]=5.9915;
+        chiCuadrado[2]=7.8147;
+        chiCuadrado[3]=9.4877;
+        chiCuadrado[4]=11.0705;
+        chiCuadrado[5]=12.5916;
+        chiCuadrado[6]=14.0671;
+        chiCuadrado[7]=15.5073;
+        chiCuadrado[8]=16.9190;
+        chiCuadrado[9]=18.3070;
+        int comp= gradoLib-1;
+        res=chiCuadrado[comp];
+        return res;
+    }
+    

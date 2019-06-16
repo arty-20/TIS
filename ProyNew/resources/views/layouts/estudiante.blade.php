@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -22,7 +22,7 @@
     <div class="wrapper">
 
       <header class="main-header">
-        <a href="#" class="logo">
+        <a href="{{url('estudiante/inscripcion')}}" class="logo">
           <span class="logo-mini"><b>Es</b>t</span>
           <span class="logo-lg"><b>Estudiante</b></span>
         </a>
@@ -35,12 +35,12 @@
             <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('login') }}">Login <i class="fa fa-fw fa-sign-in"></i> </a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a >
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }} <i class="fa fa-fw fa-user"></i> <span class="caret"></span>
                                 </a>
 
                                 
@@ -48,8 +48,8 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                                        <b>    Logout
+     <i class="fa fa-fw fa-sign-out"></i>             </b>                      </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}

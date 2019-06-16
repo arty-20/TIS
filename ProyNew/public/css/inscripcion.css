@@ -4,8 +4,8 @@
   padding: 10px 20px;
   /* margin: 15px 10px; */
   width: 300px;
+  
 }
-
 .prueba1{
   clear: both;
   padding: 0px 20px;
@@ -39,7 +39,7 @@
   -ms-flex-direction: column;
   flex-direction: column;
   min-width: 0;
-  height: 210px;
+  height: 270px;
   /* word-wrap: break-word; */
   background-color: #fff;
   background-clip: border-box;
@@ -92,5 +92,8 @@
   .card-columns .card {
     display: inline-block;
     width: 100%;
+  }
+  .jaja{
+    margin-bottom: 10px;
   }
 }

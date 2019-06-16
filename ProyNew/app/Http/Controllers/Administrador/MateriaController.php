@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Modelos\Materia;
 use Illuminate\Support\Facades\Redirect;
-use App\Http\Requests\MateriaFormRequest;
 use DB;
-
 
 class MateriaController extends Controller
 {
@@ -22,7 +20,7 @@ class MateriaController extends Controller
             $query=trim($request->get('searchText'));
             $materias=DB::table('materia')->where('NOMBRE_MATERIA','LIKE','%'.$query.'%')
             ->where ('ESTADO', '=', '1')
-            ->orderBy('ID_MATERIA','desc')
+            ->orderBy('ID_MATERIA','asc')
             ->paginate(3);
             return view('administrador.materia.index',["materias"=>$materias,"searchText"=>$query]);
         }
@@ -31,12 +29,29 @@ class MateriaController extends Controller
     {
         return view("administrador.materia.create");
     }
-    public function store (MateriaFormRequest $request)
+    public function store (Request $request)
     {
+        $pase=false;
         $materia=new Materia;
-        $materia->NOMBRE_MATERIA=$request->get('NOMBRE_MATERIA');
+	$n = $request->get('NOMBRE_MATERIA');
+        $materia->NOMBRE_MATERIA=$n;
         $materia->ESTADO='1'; 
-        $materia->save();
+        $materiaspasadas= DB::table('materia');
+	$materiaspasadas=$materiaspasadas->get();
+        //foreach($materiaspasadas as $mat){
+          //  $nombre= $mat->NOMBRE_MATERIA;
+            //if($n != $nombre){
+              //  $pase=true;
+            //}else{
+              //  $pase=false;
+            //}
+        //}
+        //if($materiaspasadas == null){
+          //  $materia->save();
+        //}
+        //if($pase==true){
+            $materia->save();
+        //}
         return Redirect::to('administrador/materia');
     }
     public function show($id)
@@ -47,7 +62,7 @@ class MateriaController extends Controller
     {
         return view("administrador.materia.edit",["materia"=>Materia::findOrFail($id)]);
     }
-    public function update(MateriaFormRequest $request,$id)
+    public function update(Request $request,$id)
     {
         $materia=Materia::findOrFail($id);
         $materia->NOMBRE_MATERIA=$request->get('NOMBRE_MATERIA');

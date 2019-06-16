@@ -16,7 +16,6 @@
     <input type="hidden" name="ID_PORTAFOLIO" value="{{$idpor}}">
     <div class="col-auto">
       <div class="form-group mx-sm-3 mb-2">
-          <label for="file">Archivo de Clase</label>
           <input type="file" name="archivo" class="form-control-file">
       </div>
     </div>

@@ -25,6 +25,11 @@
                             <a href="{{URL::action('estudiante\SesionMateriaController@listarSesiones',
                         array('idGrupo'=>$gi->ID_GRUPOLAB ,
                         'idEstudiante'=>$gi->ID_ESTUDIANTE))}}" class="btn btn-primary">Entrar al Curso</a>
+                        <a href="{{URL::action('estudiante\SesionMateriaController@listarCalificaciones',
+                                array('idGrupo'=>$gi->ID_GRUPOLAB ,
+                                'idEstudiante'=>$gi->ID_ESTUDIANTE))}}" 
+                                class="btn btn-primary jaja">
+                                Calificaciones</a>
                         </div>
                     </div>
                 @endif

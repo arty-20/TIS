@@ -54,6 +54,7 @@ class GestionController extends Controller
         ->where('ESTADO','=','1');
         $gestionpasada=$gestionpasada->get();
         $pase=true;
+        
         foreach ($gestionpasada as $gest) {
             $inicio=$gest->INICIO_GESTION;
             $fin=$gest->FIN_GESTION;
@@ -61,6 +62,14 @@ class GestionController extends Controller
                 $pase=false;   
             }
             if(($gestion->FIN_GESTION >= $inicio) && ($gestion->FIN_GESTION <= $fin)){
+                $pase=false;
+            }
+        }
+        foreach($gestionpasada as $ge){
+            $nombre= $ge->NOMBRE_GESTION;
+            if($gestion->NOMBRE_GESTION != $ge->NOMBRE_GESTION){
+                $pase=true;
+            }else{
                 $pase=false;
             }
         }
@@ -122,7 +131,7 @@ class GestionController extends Controller
                 'h.HORA_FIN','doc.NOMBRE_DOCENTE','doc.APELLIDO_DOCENTE','aux.NOMBRE_AUXILIAR',
                 'aux.APELLIDO_AUXILIAR','mat.NOMBRE_MATERIA','dm.ID_DOCENTE_MATERIA','hdl.ID_HORA_DIA_LABORATORIO')
         ->where('g.ID_GESTION','=',$id)
-        ->paginate(1);
+        ->paginate(10);
         return view('administrador.gestion.lista.datosGestion',["lista"=>$lista]);
     }
 

@@ -20,9 +20,9 @@ class EstudianteController extends Controller
             $query=trim($request->get('searchText'));
             $estudiantes=DB::table('estudiante')->where('NOMBRE_ESTUDIANTE','LIKE','%'.$query.'%')
             ->where ('ESTADO', '=', '1') 
-            ->orderBy('ID_ESTUDIANTE','desc')
+            ->orderBy('ID_ESTUDIANTE','asc')
             ->paginate(3);
-            return view('administrador.estudiante.index',["estudiantes"=>$estudiantes,"searchText"=>$query]);
+            return view('administrador.estudiante.index',compact("estudiantes"),["searchText"=>$query]);
         }
     }
 

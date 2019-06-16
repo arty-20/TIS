@@ -1,4 +1,3 @@
-
 @extends('layouts.docente')
 @section('arbol')
   <li class="treeview">
@@ -10,7 +9,7 @@
      <ul class="treeview-menu">
        @foreach($materias as $materia)
         <li><a href="{{URL::action('docente\DocenteController@listarGrupos',
-            array('idMateria'=>$materia->ID_MATERIA, 'idDocente'=>$id))}}"><i class="fa fa-circle-o"></i>{{$materia->NOMBRE_MATERIA}}</a>
+            array('idMateria'=>$materia->ID_MATERIA))}}"><i class="fa fa-circle-o"></i>{{$materia->NOMBRE_MATERIA}}</a>
         </li>
      @endforeach
     </ul>
@@ -19,7 +18,8 @@
 @endsection
 
 @section('contenido')
- <h3><b> Materias Registradas</b></h3>
+
+<h3><b> Materias Registradas</b></h3>
 
 <div class="row">    
 <div class="cards">   
@@ -40,7 +40,7 @@
     <div class="card">
       <div class="card-body">
         <div class="info-box bx"><a style=" color: #33313b;" href="{{URL::action('docente\DocenteController@listarGrupos',
-            array('idMateria'=>$materia->ID_MATERIA, 'idDocente'=>$id))}}">
+            array('idMateria'=>$materia->ID_MATERIA))}}">
             <span class="info-box-icon" ><i class="fa fa-fw fa-users"></i></span>
               <div class="info-box-content">
               

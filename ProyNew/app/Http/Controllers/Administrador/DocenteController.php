@@ -22,7 +22,7 @@ class DocenteController extends Controller
             $query=trim($request->get('searchText'));
             $docentes=DB::table('docente')->where('NOMBRE_DOCENTE','LIKE','%'.$query.'%')
             ->where ('ESTADO', '=', '1')
-            ->orderBy('ID_DOCENTE','desc')
+            ->orderBy('ID_DOCENTE','asc')
             ->paginate(3);
             return view('administrador.docente.index',["docentes"=>$docentes,"searchText"=>$query]);
         }
@@ -52,10 +52,9 @@ class DocenteController extends Controller
     {
         return view("administrador.docente.edit",["docente"=>Docente::findOrFail($id)]);
     }
-    public function update(DocenteFormRequest $request,$id)
+    public function update(Request $request,$id)
     {
         $docente=Docente::findOrFail($id);
-        $docente->CONTRASENIA=$request->get('CONTRASENIA');
         $docente->EMAIL=$request->get('EMAIL');
         $docente->NOMBRE_DOCENTE=$request->get('NOMBRE_DOCENTE');
         $docente->APELLIDO_DOCENTE=$request->get('APELLIDO_DOCENTE');

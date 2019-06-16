@@ -25,45 +25,57 @@
     </div>
   </div>
 </div>
- <div class="rows">
-	<div class="panel panel-primary">
-	<div class="panel-body">
-	  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-		<div class="form-group ">
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+	<div class="form-group">
+	  <label for="CANTIDAD">Seleccione la cantidad maxima de alumnos</label>
+	   <input type="number" name="CANTIDAD" id="CANTIDAD" name="cantidad" min="5" max="60">
+	</div>
+</div>
+ <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+	  <div class="form-group ">
 		<label>Laboratorio: </label>
+		<div class="rows">
 		<select name="ID_LABORATORIO" id="ID_LABORATORIO" class="laboratorio" >
 			<option value="" disabled="true" selected="true"> Seleccionar laboratorio</option>
 			@foreach($labs as $laboratorio)
 				<option value="{{$laboratorio->ID_LABORATORIO}}" >{{ $laboratorio->NOMBRE_LABORATORIO }}</option>
 			@endforeach
 		</select>
+		</div>
 	 </div>
 	</div>
+	
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 	<div class="form-group ">
 		<label> Dia: </label>
+		<div class="rows">	
 		<select name="ID_DIA" id="ID_DIA" class="dia" >
 			<option value="" disabled="true" selected="true">Seleccionar dia</option>
 		</select>
+		</div>
 	</div>
 </div>
+
 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 	<div class="form-group ">
 		<label> Horario: </label>
+		<div class="rows">
 		<select name="ID_HORA" id="ID_HORA" class="hora">
 			<option value="" disabled="true" selected="true">Seleccionar horario</option>
 		</select>
+		</div>
 	</div>
 </div>
+
 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 	<div class="form-group ">
 		<label> Auxiliar: </label>
-		<select name="ID_AUXILIAR" id="ID_AUXILIAR" class="auxiliar" >
+		<div class="rows">		
+			<select name="ID_AUXILIAR" id="ID_AUXILIAR" class="auxiliar" >
 				<option value="0" disabled="true" selected="true">Seleccionar auxiliar</option>
-          
-        </select>
+			</select>
+		</div>
 	</div>
-</div>
 </div>
 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 	<div class="form-group">
@@ -73,9 +85,23 @@
 	</div>
 {!!Form::close()!!}
 </div>
+
+<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+	<div class="form-group">
+	<a href="{{URL::action('docente\RegistroAuxController@crearAuxiliar',
+               array('idM'=>$materia->ID_MATERIA))}}"><button class="btn btn-success">Registro Auxiliar</button></a>
+		
+	</div>
 </div>
 
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:right;">
+	<div class="form-group">
+	<a href="{{URL::action('docente\DocenteController@listarGrupos',
+               array('idM'=>$materia->ID_MATERIA))}}" ><button class="btn btn-warning">Volver...</button></a>
+		
+	</div>
 </div>
+
 <script src="{{asset('js/jQuery-2.1.4.min.js')}}"></script>
 <script type="text/javascript">
 
@@ -86,8 +112,6 @@
 			
 			var id_lab=$(this).val();
 			 console.log(id_lab);
-			var div=$(this).parent();
- 			console.log(div);
 			var op=" ";
 
 			$.ajax({
@@ -114,7 +138,6 @@
 			var id_lab = $(".laboratorio").val();
 			var id_dia=$(this).val();
 			console.log(id_dia);
-			var a=$(this).parent();
 			console.log(id_lab);
 			var op="";
 
@@ -127,7 +150,7 @@
 					console.log("horas");
 					op+='<option value="0" >Seleccionar horario: </option>';
 						for(var i=0;i<data.length;i++){
-						op+='<option value="'+data[i].ID_HORA+'">'+data[i].HORA_INICIO+' - '+data[i].HORA_FIN+'</option>';
+							op+='<option value="'+data[i].ID_HORA+'">'+data[i].HORA_INICIO+' - '+data[i].HORA_FIN+'</option>';
 					 }
 					$(".hora").html("");
 				   $(".hora").append(op);
@@ -144,7 +167,6 @@
 			var id_dia=$(".dia").val();
 			var id_hora = $(this).val();
 			console.log(id_dia);
-			var c=$(this).parent();
 			console.log(id_hora);
 			var a="";
 
@@ -154,9 +176,8 @@
 				data:{'idDia':id_dia,'idHora':id_hora},
 				dataType:'json',//return data will be json
 				success:function(data){
-					console.log(data[0].NOMBRE_AUXILIAR);
 					a+='<option value="0" >Seleccionar Auxiliar: </option>';
-					for(var i=0;i<date.length;i++){
+					for(var i=0;i<data.length;i++){
 						a+='<option value="'+data[i].ID_AUXILIAR+'">'+data[i].NOMBRE_AUXILIAR+'  '+data[i].APELLIDO_AUXILIAR+'</option>';
 					 }
 					$(".auxiliar").html("");

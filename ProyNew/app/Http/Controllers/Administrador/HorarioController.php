@@ -35,7 +35,9 @@ class HorarioController extends Controller
 
             ->where('ESTADO','=','1')->orderBy('ID_LABORATORIO','asc');
             $laboratorio=$laboratorio->get();
-            return view('administrador.horario.index',["horario"=>$horario,"laboratorio"=>$laboratorio,"searchText"=>$query]);
+            $dia=DB::table('dia')->get();
+            $hora=DB::table('hora_clase')->get();
+            return view('administrador.horario.index',["horario"=>$horario,"laboratorio"=>$laboratorio,"dia"=>$dia,"hora"=>$hora,"searchText"=>$query]);
         }
     }
 
@@ -50,8 +52,11 @@ class HorarioController extends Controller
             //->where('DISPONIBLE','=','1')
             ->orderBy('hdl.ID_HORA_DIA_LABORATORIO','desc')
             ->paginate(10);
-        $dia= DB::table('dia')->get();
-        $hora=DB::table('hora_clase')->get();
+            
+        $dia= DB::table('dia');
+        $dia=$dia->get();
+        $hora=DB::table('hora_clase');
+        $hora=$hora->get();
         $laboratorio=DB::table('laboratorio')->get();
         return view("administrador.horario.show",["horario"=>$horario]);
     }
@@ -80,13 +85,15 @@ class HorarioController extends Controller
             //->where('DISPONIBLE','=','1')
             ->orderBy('hdl.ID_HORA_DIA_LABORATORIO','asc')
             ->paginate(10);
-
+        //$horario=$horario->get();
             $laboratorio=DB::table('laboratorio as lab')
             ->select('lab.ID_LABORATORIO','NOMBRE_LABORATORIO','ESTADO')
 
             ->where('ESTADO','=','1')->orderBy('ID_LABORATORIO','asc');
             $laboratorio=$laboratorio->get();    
-        return view("administrador.horario.laboratorios.labs",["horario"=>$horario,"laboratorio"=>$laboratorio]);
+            $dia=DB::table('dia')->get();
+            $hora=DB::table('hora_clase')->get();
+        return view("administrador.horario.laboratorios.labs",compact("horario"),["laboratorio"=>$laboratorio,"dia"=>$dia,"hora"=>$hora]);
     
     }
 

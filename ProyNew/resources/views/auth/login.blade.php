@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -19,6 +19,8 @@
   
   <!-- iCheck -->
   <link rel="stylesheet" href="{{asset('plugins/iCheck/square/blue.css')}}">
+<link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
+    <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -1,19 +1,24 @@
 @extends('estudiante.inscripcion.sesionMateria.principal')
 @section('sesionMateria')
-    <div class="row">
-
-      <!-- @if($portafolio1)
-        @foreach($portafolio1 as $p)
-        <p>{{$p->ID_PORTAFOLIO}}</p>
-      @endforeach
-      @endif -->
-      <!-- <p>{{Request::path()}}</p>
-      <p>{{public_path()}}</p> -->
+  <div class="container">
+    <div align="center">
+      <h1>Práctica de la Sesión</h1>
     </div>
-    <div class="container">
-
-    <div class="list-group">
-      <a href="#" class="list-group-item list-group-item-action">{{$practica}}</a>
-    </div>
+      
+      <table class="table table-responsive">
+        <tr>
+          <th>{{$practica}}</th>
+          <th>
+            <a href="{{URL::action('estudiante\SesionMateriaController@descargarPractica',
+                          array('idprac'=>$idPrac,
+                          'idDocente'=>$idDocente,
+			                    'i'=>$i,
+                          'ruta'=>$practica))}}" >
+              <button class="btn btn-primary mb-2">Descargar</button>
+            </a>
+          </th>
+        </tr>
+      </table>
+  </div>
 
 @endsection

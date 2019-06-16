@@ -7,9 +7,9 @@
  <div class="cards">   
   <div class="card-columns">
     @foreach($materias as $materia)
-    <div class="card">
     {!!Form::open(array('url'=>'docente/materias','method'=>'POST','autocomplete'=>'off'))!!}
     {{Form::token()}}
+    <div class="card">
       <div class="card-body">
         <div class="info-box bx">
             <span class="info-box-icon" ><i class="fa fa-fw fa-users"></i></span>
@@ -22,11 +22,10 @@
       </div>
       
     </div>
- 
-  
-    @endforeach
+     @endforeach
   
  </div>  
- </div>    
+ </div>  
+ </div> 
           
  @endsection

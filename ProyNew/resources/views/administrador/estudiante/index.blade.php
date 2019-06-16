@@ -1,5 +1,5 @@
-@extends ('layouts.admin')
-@section ('contenido')
+@extends ('layouts.administrador')
+@section ('contenidoadmin')
 <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" style="float:left;">
         <h3 >Listado de estudiantes</h3>
@@ -25,7 +25,7 @@
                 @endforeach
             </table>
         </div>
-        {{$estudiantes->render()}}
+        {!! $estudiantes->links('administrador.pagination') !!}
     </div>
     </div>
 @endsection

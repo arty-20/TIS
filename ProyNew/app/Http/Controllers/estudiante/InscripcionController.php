@@ -18,7 +18,7 @@ class InscripcionController extends Controller{
     }
 
     public function index(){
-        // $id = Session::get('id');
+        $id = Session::get('id');
         $gruposInscrito=DB::table('inscripcion as ins')
         ->join('grupo_laboratorio as gc','gc.ID_GRUPOLAB','=','ins.ID_GRUPOLAB')
         ->join('hora_dia_laboratorio as hdl','gc.ID_HORARIO_LABORATORIO','=','hdl.ID_HORA_DIA_LABORATORIO')
@@ -29,8 +29,8 @@ class InscripcionController extends Controller{
         ->join('dia as d','d.ID_DIA','=','hdl.ID_DIA')
         ->join('hora_clase as hc','hc.ID_HORA','=','hdl.ID_HORA')
         ->where('ESTADO_GC','=','1')
-        // ->where('ID_ESTUDIANTE','=', $id);
-        ->where('ID_ESTUDIANTE','=', '100004');
+        ->where('ID_ESTUDIANTE','=', $id);
+        // ->where('ID_ESTUDIANTE','=', '100004');
         $gruposInscrito = $gruposInscrito->get();
         return view('estudiante.inscripcion.index',["gruposInscrito"=>$gruposInscrito]);
     }
@@ -38,11 +38,11 @@ class InscripcionController extends Controller{
         return view("estudiante.inscripcion.index");
     }
     public function store(InscripcionFormRequest $request ){
-        // $id = Session::get('id');
+        $id = Session::get('id');
         $bandera = false;
         $inscripcion = new Inscripcion;
-        // $inscripcion->ID_ESTUDIANTE = "$id";
-        $inscripcion->ID_ESTUDIANTE = '100004';
+        $inscripcion->ID_ESTUDIANTE = "$id";
+        // $inscripcion->ID_ESTUDIANTE = '100004';
         $idgrupo=$request->get('ID_GRUPOLAB');
         $inscripcion->ID_GRUPOLAB =$idgrupo;
 
@@ -59,7 +59,8 @@ class InscripcionController extends Controller{
 
         if(count($insc)<$cant){
             $insc1 = DB::table('inscripcion')
-            ->where('ID_ESTUDIANTE','=','100004')
+            ->where('ID_ESTUDIANTE','=', $id)
+            // ->where('ID_ESTUDIANTE','=','100004')
             ->where('ID_GRUPOLAB','=',$idgrupo);
             $insc1 = $insc1->get()->first();
             if($insc1 == null){
@@ -86,6 +87,7 @@ class InscripcionController extends Controller{
         return view('estudiante.inscripcion.listarDocentes',["docentes"=>$docentes,"id"=>$idMateria]);
     }
     public function buscarGrupos($idMateria, $idDocente){
+	$id = Session::get('id');
         $grupos=DB::table('grupo_laboratorio as g')
         ->join('docente_materia as dm', 'g.ID_DOC_MAT','=','dm.ID_DOCENTE_MATERIA')
         ->join('hora_dia_laboratorio as hdl','g.ID_HORARIO_LABORATORIO','=','hdl.ID_HORA_DIA_LABORATORIO')
@@ -98,8 +100,8 @@ class InscripcionController extends Controller{
         ->where('dm.ID_MATERIA','=',"".$idMateria."");
         $grupos = $grupos->get();
         $inscrito = DB::table('inscripcion')
-        // ->where('ID_ESTUDIANTE','=',"$id");
-        ->where('ID_ESTUDIANTE','=','100004');
+        ->where('ID_ESTUDIANTE','=',"$id");
+        // ->where('ID_ESTUDIANTE','=','100004');
         $inscrito=$inscrito->get();
         $ban = false;
         foreach($grupos as $g){ 
